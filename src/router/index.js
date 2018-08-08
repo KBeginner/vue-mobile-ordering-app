@@ -1,15 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Parent from '@/components/parent'
+import SetData from '@/components/setData'
+import GetData from '@/components/getData'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'parent',
-      component: Parent
+      name: 'setData',
+      component: SetData
+    },
+    {
+      path:'/getData/:data',
+      name:'getData',
+      component:GetData
     }
-  ]
+  ],
+  mode:'history'
 })
