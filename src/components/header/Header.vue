@@ -1,10 +1,10 @@
 <template>
-  <el-header class="app-header">
-    <el-container direction="vertical">
+  <el-container class="app-header" direction="vertical">
+    <el-container direction="vertical" class="header">
       header
     </el-container>
     <Nav></Nav>
-  </el-header>
+  </el-container>
 </template>
 
 <script>
@@ -19,5 +19,7 @@
 </script>
 
 <style scoped lang="less">
-
+  .header{
+    height: 15vh;
+  }
 </style>
