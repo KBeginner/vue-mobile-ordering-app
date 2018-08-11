@@ -36,7 +36,7 @@
     display: flex;
     justify-content: center;
     .el-menu-item{
-      margin: 0 1.5em;
+      margin: 0 5vw;
     }
   }
 </style>

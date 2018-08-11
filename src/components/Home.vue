@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-container" direction="vertical">
-    <Header></Header>
+    <Header :poiInfo="headerInfo"></Header>
     <el-main class="app-content">
       <router-view></router-view>
     </el-main>
@@ -13,6 +13,32 @@
         name: "Home",
       components:{
         Header,
+      },
+      data(){
+        return{
+          headerInfo:{}
+        }
+      },
+      methods:{
+        getGoods(){
+          fetch('/api/goods')
+            .then(response=>{
+              return response.json();
+            })
+            .then(res=>{
+              if (res.code == 0){
+                this.headerInfo = res.data.poi_info;
+              }
+            })
+            .catch(err=>{
+              this.$message('哎呀！出错啦。')
+            })
+        },
+
+      },
+      created(){
+        this.getGoods();
+
       }
     }
 </script>
