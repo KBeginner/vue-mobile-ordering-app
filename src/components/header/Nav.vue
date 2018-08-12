@@ -24,7 +24,7 @@
       },
       methods:{
         handleSelect(key,keyPath){
-          console.log(key,keyPath)
+          // console.log(key,keyPath)
         }
       }
     }
@@ -36,7 +36,7 @@
     display: flex;
     justify-content: center;
     .el-menu-item{
-      margin: 0 5vw;
+      margin: 0 7vw;
     }
   }
 </style>

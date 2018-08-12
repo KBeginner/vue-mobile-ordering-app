@@ -23,7 +23,18 @@ export default {
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;
         border-radius: 20px;
-        background: #eee;
+        background: #E4E7ED;
+        height: 30px;
+        line-height: 30px;
+      }
+    }
+  }
+  .app-header{
+    .app-nav{
+      .el-menu-item{
+        height: 45px;
+        line-height: 45px;
+        padding: 0 10px;
       }
     }
   }
