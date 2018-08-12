@@ -26,6 +26,7 @@ export default {
         background: #E4E7ED;
         height: 30px;
         line-height: 30px;
+        color: #606266;
       }
     }
   }

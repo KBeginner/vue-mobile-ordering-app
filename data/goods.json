@@ -2370,7 +2370,7 @@
 			"wm_poi_score":4.7,
 			"discounts2": [
 				{
-					"info": "新用户立减17元,首次使用银行卡支付最高再减3元",
+					"info": "新用户立减17元,使用银行卡支付最高再减3元",
 					"icon_url": "http://p0.meituan.net/xianfu/019d1bbb1310b1531e6af6172c9a5095581.png"
 				}
 			],
