@@ -44,7 +44,9 @@
           </a>
         </el-col>
       </el-row>
-      <About v-if="aboutShow" :aboutData="poiInfo"></About>
+      <transition name="dialog">
+        <About v-if="aboutShow" :aboutData="poiInfo" @closeDialog="closeDialog($event)"></About>
+      </transition>
     </el-container>
     <Nav></Nav>
   </el-container>
@@ -68,6 +70,9 @@
       methods:{
         clickAbout(){
           this.aboutShow = true
+        },
+        closeDialog(val){
+          this.aboutShow = val
         }
       },
       computed:{
@@ -189,6 +194,18 @@
         font-size: 14px;
         overflow: hidden;
       }
+    }
+    .dialog-enter,
+    .dialog-leave-to{
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    .dialog-enter-active,.dialog-leave-active{
+      transition:1s all ;
+    }
+    .dialog-enter-to,
+    .dialog-leave{
+      opacity: 1;
     }
   }
 </style>

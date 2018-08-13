@@ -17,6 +17,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #606266;
+  position: relative;
   .top-wrapper{
     .el-col{
       .el-input__inner{
