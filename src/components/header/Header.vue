@@ -201,7 +201,7 @@
       transform: translateY(-30px);
     }
     .dialog-enter-active,.dialog-leave-active{
-      transition:1s all ;
+      transition: .5s all ;
     }
     .dialog-enter-to,
     .dialog-leave{
