@@ -41,10 +41,25 @@
         },
         handleSelect(item) {
           console.log(item);
+        },
+        test(){
+          let obj = {
+            a:15616,
+            b:'685418'
+          }
+          Object.keys(obj).forEach((key)=>{
+            obj[key] = null
+
+          });
+          console.log(obj)
+          // for (let key in obj){
+          //   console.log(key+"2")
+          // }
         }
       },
       mounted() {
         this.restaurants = this.loadAll();
+        this.test()
       }
     }
 </script>

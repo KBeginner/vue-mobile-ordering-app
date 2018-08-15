@@ -7,7 +7,7 @@
         </el-row>
         <h3 class="name">{{aboutData.name}}</h3>
         <div class="score">
-          {{aboutData.wm_poi_score}}
+          <Score :getScore="aboutData.wm_poi_score"></Score>
         </div>
         <p class="express">
           {{aboutData.shipping_fee_tip}}<i> | </i>{{aboutData.min_price_tip}}<i> | </i>{{aboutData.delivery_time_tip}}
@@ -27,9 +27,13 @@
 </template>
 
 <script>
+  import Score from './Score'
     export default {
         name: "About",
       props:['aboutData'],
+      components:{
+        Score
+      },
       data(){
           return {
 
