@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-header" direction="vertical">
-    <el-container direction="vertical" class="top" :style="headerBg">
+    <el-container direction="vertical" class="top" :style="'background:url('+getInfo.head_pic_url+');'">
       <el-row type="flex" align="middle" class="top-wrapper">
         <el-col :span="3" class="retreat-item">
           <span class="icon-arrow_lift"></span>
@@ -20,10 +20,10 @@
       </el-row>
       <el-row type="flex" align="middle" class="middle-wrapper">
         <el-col :span="4" class="logo">
-          <img :src="logo"/>
+          <img :src="getInfo.pic_url"/>
         </el-col>
         <el-col :span="18" class="seller-name">
-          <h3>{{name}}</h3>
+          <h3>{{getInfo.name}}</h3>
         </el-col>
         <el-col :span="4" class="favorite-start">
           <span class="icon-star-empty"></span>
@@ -31,8 +31,8 @@
         </el-col>
       </el-row>
       <el-row type="flex" align="middle" justify="start" class="news">
-        <el-col :span="1" class="newsPic" v-if="this.poiInfo.discounts2">
-          <img :src="newsPic"/>
+        <el-col :span="1" class="newsPic" v-if="getInfo.discounts2">
+          <img :src="getInfo.discounts2[0].icon_url"/>
         </el-col>
         <el-col :span="18" class="illustrate">
           新用户立减17元，满30元立减10元。
@@ -45,7 +45,7 @@
         </el-col>
       </el-row>
       <transition name="dialog">
-        <About v-if="aboutShow" :aboutData="poiInfo" @closeDialog="closeDialog($event)"></About>
+        <About v-if="aboutShow" :aboutData="getInfo" @closeDialog="closeDialog($event)"></About>
       </transition>
     </el-container>
     <Nav></Nav>
@@ -57,7 +57,6 @@
   import About from './About'
     export default {
         name: "Header",
-      props:['poiInfo'],
       components:{
         Nav,
         About
@@ -76,18 +75,9 @@
         }
       },
       computed:{
-        headerBg(){
-          return 'background:url('+this.poiInfo.head_pic_url+');'
+        getInfo(){
+          return this.$store.getters.getHeaderInfo
         },
-        logo(){
-          return this.poiInfo.pic_url;
-        },
-        name(){
-          return this.poiInfo.name
-        },
-        newsPic(){
-          return this.poiInfo.discounts2[0].icon_url
-        }
       },
       created(){
       }

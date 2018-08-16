@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home'
-import Goods from '../components/main/Goods'
-import Rating from '../components/main/Rating'
-import Seller from '../components/main/Seller'
+import Goods from '../components/main/goods/Goods'
+import Rating from '../components/main/rating/Rating'
+import Seller from '../components/main/seller/Seller'
 
 import Test from '../components/test/Test'
 

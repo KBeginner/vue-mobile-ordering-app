@@ -1,9 +1,7 @@
 <template>
   <el-container class="app-container" direction="vertical">
-    <Header :poiInfo="headerInfo"></Header>
-    <el-main class="app-content">
-      <router-view></router-view>
-    </el-main>
+    <Header></Header>
+    <router-view></router-view>
   </el-container>
 </template>
 
@@ -16,33 +14,35 @@
       },
       data(){
         return{
-          headerInfo:{}
         }
       },
       methods:{
         getGoods(){
           fetch('/api/goods')
-            .then(response=>{
-              return response.json();
-            })
-            .then(res=>{
-              if (res.code == 0){
-                this.headerInfo = res.data.poi_info;
-              }
-            })
-            .catch(err=>{
-              this.$message('哎呀！出错啦。')
-            })
+          .then(response=>{
+            return response.json();
+          })
+          .then(res=>{
+            if (res.code == 0){
+              this.$store.commit('setHeaderInfo',res.data.poi_info);
+              this.$store.commit('setContainerData',res.data.container_operation_source);
+              this.$store.commit('setGoods',res.data.food_spu_tags)
+            }
+          })
+          .catch(err=>{
+            this.$message('哎呀！出错啦。')
+          })
         },
 
       },
       created(){
         this.getGoods();
-
       }
     }
 </script>
 
 <style scoped lang="less">
+  .app-container{
 
+  }
 </style>

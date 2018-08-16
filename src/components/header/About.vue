@@ -5,7 +5,7 @@
         <el-row class="logo">
           <img :src="aboutData.pic_url" />
         </el-row>
-        <h3 class="name">{{aboutData.name}}</h3>
+        <h1 class="name">{{aboutData.name}}</h1>
         <div class="score">
           <Score :getScore="aboutData.wm_poi_score"></Score>
         </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import Score from './Score'
+  import Score from './Star'
     export default {
         name: "About",
       props:['aboutData'],

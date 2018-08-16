@@ -17,7 +17,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #606266;
-  position: relative;
   .top-wrapper{
     .el-col{
       .el-input__inner{
@@ -34,8 +33,8 @@ export default {
   .app-header{
     .app-nav{
       .el-menu-item{
-        height: 45px;
-        line-height: 45px;
+        height: 39px;
+        line-height: 39px;
         padding: 0 10px;
       }
     }
