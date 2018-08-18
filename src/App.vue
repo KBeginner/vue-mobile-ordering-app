@@ -39,6 +39,20 @@ export default {
       }
     }
   }
+  /*.goods{
+    .goods-content{
+      .goods-menu{
+        .el-menu-item{
+          padding: 0 10px !important;
+          line-height: 0;
+          a{
+            white-space: normal;
+            line-height: 40px;
+          }
+        }
+      }
+    }
+  }*/
 }
 
 </style>

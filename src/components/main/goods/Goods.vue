@@ -1,8 +1,8 @@
 <template>
   <el-container class="goods" direction="vertical">
     <el-container class="goods-content">
-      <Menu :getContainer="container"></Menu>
-      <Foods :foodsData="goods"></Foods>
+      <Menu :getContainer="container" :goodsList="goods"></Menu>
+      <Foods :containerData="container" :foodsData="goods"></Foods>
     </el-container>
     <el-footer class="goods-footer">footer</el-footer>
   </el-container>
@@ -47,6 +47,7 @@
       right: 0;
       top:200px;
       bottom: 50px;
+      overflow: auto;
       .goods-menu{
         flex: 0 0 85px;
       }
