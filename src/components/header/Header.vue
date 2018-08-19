@@ -34,10 +34,10 @@
         <el-col :span="1" class="newsPic" v-if="getInfo.discounts2">
           <img :src="getInfo.discounts2[0].icon_url"/>
         </el-col>
-        <el-col :span="18" class="illustrate">
+        <el-col :span="17" class="illustrate">
           新用户立减17元，满30元立减10元。
         </el-col>
-        <el-col :span='5'>
+        <el-col :span='6'>
           <a @click="clickAbout">
             <span>2个活动</span>
             <span class="icon-keyboard_arrow_right"></span>

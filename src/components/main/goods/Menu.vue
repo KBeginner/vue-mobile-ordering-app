@@ -46,7 +46,6 @@
 <style scoped lang="less">
  .goods-menu{
    .menu{
-     border-right: 1px solid #eee;
      .menu-item{
        padding: 15px 10px;
        border-bottom: 1px solid #eee;
@@ -55,6 +54,7 @@
        justify-content: center;
        line-height: 22px;
        background: #F8F9F9;
+       border-right: 1px solid #eee;
        img{
          width: 20px;
          height:auto;
@@ -68,7 +68,8 @@
        }
      }
      .is-active{
-       background: #E2EFFC;
+       background: #fff;
+       border-right: 1px solid #fff;
      }
    }
  }

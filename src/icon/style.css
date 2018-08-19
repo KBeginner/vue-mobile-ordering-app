@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'mt-app';
-  src:  url('fonts/mt-app.eot?4vfy92');
-  src:  url('fonts/mt-app.eot?4vfy92#iefix') format('embedded-opentype'),
-    url('fonts/mt-app.ttf?4vfy92') format('truetype'),
-    url('fonts/mt-app.woff?4vfy92') format('woff'),
-    url('fonts/mt-app.svg?4vfy92#mt-app') format('svg');
+  src:  url('fonts/mt-app.eot?lpuks5');
+  src:  url('fonts/mt-app.eot?lpuks5#iefix') format('embedded-opentype'),
+    url('fonts/mt-app.ttf?lpuks5') format('truetype'),
+    url('fonts/mt-app.woff?lpuks5') format('woff'),
+    url('fonts/mt-app.svg?lpuks5#mt-app') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -62,4 +62,10 @@
 }
 .icon-star-full:before {
   content: "\e9d9";
+}
+.icon-plus:before {
+  content: "\ea0a";
+}
+.icon-minus:before {
+  content: "\ea0b";
 }
