@@ -60,7 +60,7 @@
          height:auto;
        }
        .text{
-         /*值展示两行文字*/
+         /*只展示两行文字*/
          -webkit-line-clamp:2;
          display: -webkit-box;
          -webkit-box-orient:vertical;

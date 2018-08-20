@@ -34,13 +34,12 @@
         <el-col :span="1" class="newsPic" v-if="getInfo.discounts2">
           <img :src="getInfo.discounts2[0].icon_url"/>
         </el-col>
-        <el-col :span="17" class="illustrate">
-          新用户立减17元，满30元立减10元。
+        <el-col :span="16" class="illustrate">
+          {{getInfo.discounts2[0].info}}
         </el-col>
-        <el-col :span='6'>
+        <el-col :span='7' class="activity-item">
           <a @click="clickAbout">
-            <span>2个活动</span>
-            <span class="icon-keyboard_arrow_right"></span>
+            <span>2个活动<span class="icon-keyboard_arrow_right"></span></span>
           </a>
         </el-col>
       </el-row>
@@ -145,6 +144,7 @@
       margin-top: 20px;
       text-align: left;
       .logo{
+        text-align: center;
         img{
           width: 50px;
           height: 50px;
@@ -154,6 +154,7 @@
       .seller-name{
         text-align: left;
         overflow: hidden;
+        padding-left:10px ;
       }
       .favorite-start{
         text-align: center;
@@ -180,10 +181,16 @@
         }
       }
       .illustrate{
-        padding:0 10px;
-        font-size: 14px;
+        padding-left: 10px;
+        /*font-size: 14px;*/
         overflow: hidden;
+        -webkit-line-clamp:1;
+        display: -webkit-box;
+        -webkit-box-orient:vertical;
       }
+    }
+    .activity-item{
+      text-align: center;
     }
     .dialog-enter,
     .dialog-leave-to{

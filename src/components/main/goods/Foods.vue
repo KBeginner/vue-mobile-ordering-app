@@ -17,7 +17,7 @@
         <el-col :span="8" class="goods-pic">
           <img :src="item.picture"/>
         </el-col>
-        <el-col :span="10" class="goods-info">
+        <el-col :span="12" class="goods-info">
           <h1>{{item.name}}</h1>
           <div class="goods-sale-record">
             <span>销量{{item.month_saled}}</span>
@@ -27,7 +27,7 @@
             <span><i>{{'￥'+item.min_price}}</i>{{' / '+item.unit}}</span>
           </div>
         </el-col>
-        <el-col :span="6" class="add-shopping-cart">
+        <el-col :span="4" class="add-shopping-cart">
           <a class=" add-btn"><span class="icon-plus"></span></a>
         </el-col>
       </el-row>
@@ -100,6 +100,7 @@
         }
         .goods-info{
           text-align: left;
+          padding-left:10px;
           *{
             margin: 10px 0;
           }
@@ -130,6 +131,7 @@
             line-height: 25px;
             position: absolute;
             bottom: 10px;
+            right: 5%;
             span{
               padding: 5px;
               font-size: 13px;

@@ -72,6 +72,7 @@
       border-radius: 10px;
       position: relative;
       padding: 50px 20px;
+      background-size: 100% 100% !important;
       .close-dialog{
         position: absolute;
         bottom: 0;
