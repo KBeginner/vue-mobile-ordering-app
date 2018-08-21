@@ -1,13 +1,13 @@
 <template>
   <div class="goods-main" v-if="foodsData">
-    <el-container direction="vertical" class="special-column">
+    <el-container direction="vertical" class="special-column foods-list">
       <el-row class="special-item"
               v-for="item in containerData.operation_source_list"
               :key="item.pic_url">
         <img :src="item.pic_url"/>
       </el-row>
     </el-container>
-    <el-container direction="vertical" class="goods-column"
+    <el-container direction="vertical" class="goods-column foods-list"
                   v-for="column in foodsData" :key="column.name">
       <el-row class="column-name">
         <i>|</i><h1>{{column.name}}</h1>
@@ -18,7 +18,7 @@
           <img :src="item.picture"/>
         </el-col>
         <el-col :span="12" class="goods-info">
-          <h1>{{item.name}}</h1>
+          <h2>{{item.name}}</h2>
           <div class="goods-sale-record">
             <span>销量{{item.month_saled}}</span>
             <span>{{item.praise_content}}</span>
@@ -78,6 +78,7 @@
         line-height: 40px;
         text-align: left;
         padding: 0 10px;
+        font-size: 15px;
         i,h1{
           display: inline-block;
           margin-right: 10px;
@@ -91,33 +92,35 @@
         width: 100%;
         height: 100%;
         position: relative;
-        margin: 10px 0;
+        margin: 15px 0;
         .goods-pic{
           img{
-            width: 80px;
+            width: 89px;
             height: auto;
           }
         }
         .goods-info{
           text-align: left;
-          padding-left:10px;
+          padding-left:15px;
           *{
-            margin: 10px 0;
+            margin: 5px 0;
           }
           .goods-sale-record{
             color: #C0C4CC;
             span{
-              font-size: 13px;
+              font-size: 12px;
               margin-right: 5px;
             }
           }
-          h1{
+          h2{
             line-height: 20px;
             font-weight: bold;
+            font-size: 14px;
           }
           .goods-price{
             span{
               color: #C0C4CC;
+              font-size: 12px;
               i{
                 color: darkred;
               }
@@ -130,7 +133,7 @@
             height: 25px;
             line-height: 25px;
             position: absolute;
-            bottom: 10px;
+            bottom: 15px;
             right: 5%;
             span{
               padding: 5px;

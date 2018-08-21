@@ -2,7 +2,7 @@
   <div class="score">
     <!--循环生成星星，原理是通过添加类名给span设置星星背景图-->
     <span class="star-item" v-for="star in starScore" :class="star"></span>
-    <span>{{getScore}}</span>
+    <span class="grade">{{getScore}}</span>
   </div>
 </template>
 
@@ -42,11 +42,13 @@
     align-items: center;
     justify-content: center;
     .star-item{
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       display: inline-block;
       margin: 0 5px;
       background: no-repeat;
+      -webkit-background-size: 100% 100%;
+      background-size: 100% 100% !important;
     }
     .star-item.on{
       background: url("../../assets/star/star24_on@2x.png");  //全星
@@ -56,6 +58,12 @@
     }
     .star-item.off{
       background: url("../../assets/star/star24_off@2x.png");   //空星星
+    }
+    .grade{
+      height: 40px;
+      line-height: 45px;
+      font-size: 14px;
+      margin:0 5px;
     }
   }
 </style>

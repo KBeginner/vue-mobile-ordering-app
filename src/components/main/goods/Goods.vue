@@ -1,8 +1,12 @@
 <template>
   <el-container class="goods" direction="vertical">
     <el-container class="goods-content">
-      <Menu :getContainer="container" :goodsList="goods"></Menu>
-      <Foods :containerData="container" :foodsData="goods"></Foods>
+      <div class="goods-menu" ref="menuScroll">
+        <Menu :getContainer="container" :goodsList="goods"></Menu>
+      </div>
+      <div ref="foodScroll">
+        <Foods :containerData="container" :foodsData="goods" ></Foods>
+      </div>
     </el-container>
     <el-footer class="goods-footer">footer</el-footer>
   </el-container>
@@ -11,6 +15,7 @@
 <script>
   import Menu from './Menu'
   import Foods from './Foods'
+  import BScroll from 'better-scroll'
     export default {
         name: "Goods",
       components:{
@@ -23,6 +28,15 @@
           }
       },
       methods:{
+        initScroll(){
+          new BScroll(this.$refs.menuScroll);
+          new BScroll(this.$refs.foodScroll)
+        },
+        calculateListHeight(){
+          //获取商品品种列表
+          let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
+          // console.log(foodList)
+        }
       },
       computed:{
         goods(){
@@ -33,7 +47,9 @@
         }
 
       },
-      created(){
+      mounted(){
+        this.initScroll();
+        this.calculateListHeight()
       }
     }
 </script>

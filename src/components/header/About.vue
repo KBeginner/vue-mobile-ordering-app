@@ -114,6 +114,7 @@
         }
         .express,.express-time{
           color: #909399;
+          font-size:13px;
         }
         .express i{
           margin: 0 10px;
@@ -123,11 +124,13 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          font-size: 13px;
           img{
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             margin: 0 5px;
+            border-radius:4px;
           }
         }
         .border{

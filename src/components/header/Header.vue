@@ -2,10 +2,10 @@
   <el-container class="app-header" direction="vertical">
     <el-container direction="vertical" class="top" :style="'background:url('+getInfo.head_pic_url+');'">
       <el-row type="flex" align="middle" class="top-wrapper">
-        <el-col :span="3" class="retreat-item">
+        <el-col :span="2" class="retreat-item">
           <span class="icon-arrow_lift"></span>
         </el-col>
-        <el-col :span="15" class="search-item">
+        <el-col :span="16" class="search-item">
          <a> <span class="icon-search"></span></a>
           <el-input placeholder="请输入商品"></el-input>
         </el-col>
@@ -34,10 +34,10 @@
         <el-col :span="1" class="newsPic" v-if="getInfo.discounts2">
           <img :src="getInfo.discounts2[0].icon_url"/>
         </el-col>
-        <el-col :span="16" class="illustrate">
+        <el-col :span="17" class="illustrate" v-if="getInfo.discounts2">
           {{getInfo.discounts2[0].info}}
         </el-col>
-        <el-col :span='7' class="activity-item">
+        <el-col :span='6' class="activity-item">
           <a @click="clickAbout">
             <span>2个活动<span class="icon-keyboard_arrow_right"></span></span>
           </a>
@@ -107,11 +107,12 @@
       }
       .search-item{
         position: relative;
+        padding: 0 10px;
         .icon-search{
           position: absolute;
           z-index: 1;
           top:0;
-          right: 0;
+          right: 10px;
           color: #c0c4cc;
           width: 30px;
           height: 30px;
@@ -182,7 +183,7 @@
       }
       .illustrate{
         padding-left: 10px;
-        /*font-size: 14px;*/
+        font-size: 14px;
         overflow: hidden;
         -webkit-line-clamp:1;
         display: -webkit-box;
@@ -191,6 +192,7 @@
     }
     .activity-item{
       text-align: center;
+      font-size:14px;
     }
     .dialog-enter,
     .dialog-leave-to{
