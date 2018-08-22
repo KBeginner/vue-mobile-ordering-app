@@ -2,7 +2,22 @@
   <el-container class="goods" direction="vertical">
     <el-container class="goods-content">
       <div class="goods-menu" ref="menuScroll">
-        <Menu :getContainer="container" :goodsList="goods"></Menu>
+        <ul class="menu">
+          <li class="menu-item"
+              @click="selectMenu(0)"
+              :class="{'is-current':currentIndex==0}">
+            <img :src="container.tag_icon"/>
+            <a class="text">{{container.tag_name}}</a>
+          </li>
+          <li class="menu-item"
+              v-for="(food,index) in goods"
+              :key="index"
+              @click="selectMenu(index+1)"
+              :class="{'is-current':currentIndex==index+1}">
+            <img v-if="food.icon" :src="food.icon" />
+            <a class="text">{{food.name}}</a>
+          </li>
+        </ul>
       </div>
       <div ref="foodScroll">
         <Foods :containerData="container" :foodsData="goods" ></Foods>
@@ -13,29 +28,53 @@
 </template>
 
 <script>
-  import Menu from './Menu'
   import Foods from './Foods'
   import BScroll from 'better-scroll'
     export default {
         name: "Goods",
       components:{
-        Menu,
         Foods
       },
       data(){
           return {
-
+            listHeight:[],
+            menuScroll:{},
+            foodScroll:{},
+            scrollY:0
           }
       },
       methods:{
+          /*滚动方法*/
         initScroll(){
-          new BScroll(this.$refs.menuScroll);
-          new BScroll(this.$refs.foodScroll)
+          this.menuScroll = new BScroll(this.$refs.menuScroll,{     //菜单栏滚动
+            click:true      //better-scroll默认点击事件为false
+          });
+          this.foodScroll = new BScroll(this.$refs.foodScroll,{     //商品页滚动
+            probeType:3
+          });
+          /*给foodScroll添加一个监听事件on(事件名,执行的函数)*/
+          this.foodScroll.on('scroll',(position)=>{     //scroll为better-scroll自带滚动事件
+            // console.log(position.y);     //从原点开始滚动，往下滚时 position.y为负值，向上滚为正
+            this.scrollY = Math.abs(Math.round(position.y));  //取整再去绝对值
+            // console.log(this.scrollY)
+            // console.log(this.currentIndex);
+          })
         },
         calculateListHeight(){
-          //获取商品品种列表
+          //计算分类区间的高度
           let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
-          // console.log(foodList)
+          let height = 0;
+          this.listHeight.push(height);
+          for (let i=0,len=foodList.length; i<len; i++){
+            height+=foodList[i].clientHeight;
+            this.listHeight.push(height);
+          }
+          // console.log(this.listHeight)
+        },
+        selectMenu(index){
+          let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
+          let element = foodList[index];
+          this.foodScroll.scrollToElement(element,250);   //scrollToElement是better-scroll滚动到目标元素的事件
         }
       },
       computed:{
@@ -44,13 +83,30 @@
         },
         container(){
           return this.$store.getters.getContainerData
+        },
+        /*计算商品列表滚动下标*/
+        currentIndex(){
+          for (let i=0,len=this.listHeight.length; i<len; i++){
+            let height1 = this.listHeight[i];
+            let height2 = this.listHeight[i+1];
+            if ((this.scrollY>=height1 && this.scrollY<height2) || !height2){     //!height处理数组越界问题
+              return i
+            }
+          }
+          return 0;
         }
-
       },
-      mounted(){
-        this.initScroll();
-        this.calculateListHeight()
-      }
+      watch:{
+        goods:{
+          handler(){
+            /*DOM渲染完后执行*/
+            this.$nextTick(()=>{      //进行dom操作常用方法
+              this.initScroll();
+              this.calculateListHeight()
+            })
+          }
+        }
+      },
     }
 </script>
 
@@ -66,6 +122,35 @@
       overflow: auto;
       .goods-menu{
         flex: 0 0 85px;
+        .menu{
+          .menu-item{
+            padding: 15px 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 22px;
+            background: #F8F9F9;
+            border-right: 1px solid #eee;
+            img{
+              width: 15px;
+              height:auto;
+              margin: 0 2px;
+            }
+            .text{
+              /*只展示两行文字*/
+              -webkit-line-clamp:2;
+              display: -webkit-box;
+              -webkit-box-orient:vertical;
+              overflow: hidden;
+              font-size: 13px;
+            }
+          }
+          .is-current{
+            background: #fff;
+            border-right: 1px solid #fff;
+          }
+        }
       }
       .goods-main{
         flex: 1;
