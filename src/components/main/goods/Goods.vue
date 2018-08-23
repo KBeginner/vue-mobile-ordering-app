@@ -23,17 +23,21 @@
         <Foods :containerData="container" :foodsData="goods" ></Foods>
       </div>
     </el-container>
-    <el-footer class="goods-footer">footer</el-footer>
+    <el-footer class="goods-footer">
+      <shop-cart></shop-cart>
+    </el-footer>
   </el-container>
 </template>
 
 <script>
   import Foods from './Foods'
   import BScroll from 'better-scroll'
+  import shopCart from './shopCart/shopCart'
     export default {
         name: "Goods",
       components:{
-        Foods
+        Foods,
+        shopCart
       },
       data(){
           return {
@@ -159,12 +163,11 @@
     .goods-footer{
       width: 100%;
       height: 50px !important;
-      line-height: 50px;
-      display: flex;
       position: absolute;
       bottom: 0;
       color: #fff;
-      background: #909399;
+      padding: 0;
+      z-index: 99;
     }
   }
 </style>

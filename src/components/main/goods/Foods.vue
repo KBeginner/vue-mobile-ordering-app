@@ -12,24 +12,26 @@
       <el-row class="column-name">
         <i>|</i><h1>{{column.name}}</h1>
       </el-row>
-      <el-row class="goods-item"
-              v-for="item in column.spus" :key="item.id">
-        <el-col :span="8" class="goods-pic">
+      <el-row class="goods-item" v-for="item in column.spus" :key="item.id">
+        <div class="goods-pic">
           <img :src="item.picture"/>
-        </el-col>
-        <el-col :span="12" class="goods-info">
+        </div>
+        <div class="goods-info">
           <h2>{{item.name}}</h2>
           <div class="goods-sale-record">
             <span>销量{{item.month_saled}}</span>
             <span>{{item.praise_content}}</span>
           </div>
-          <div class="goods-price">
-            <span><i>{{'￥'+item.min_price}}</i>{{' / '+item.unit}}</span>
+          <div class="goods-order">
+            <span class="food-price"><i>{{'￥'+item.min_price}}</i>{{' / '+item.unit}}</span>
+            <div class="add-shopping-cart">
+              <a class=" minus-btn"><span class="icon-minus"></span></a>
+              <span class="order-num">20</span>
+              <a class=" add-btn"><span class="icon-plus"></span></a>
+            </div>
           </div>
-        </el-col>
-        <el-col :span="4" class="add-shopping-cart">
-          <a class=" add-btn"><span class="icon-plus"></span></a>
-        </el-col>
+
+        </div>
       </el-row>
     </el-container>
   </div>
@@ -58,7 +60,7 @@
   .goods-main{
     .special-column{
       overflow: hidden;
-      padding:  10px 20px 0;
+      padding:  10px 10px 0;
       border-bottom: 1px solid #eee;
       .special-item{
         margin-bottom: 10px;
@@ -77,7 +79,7 @@
         height: 40px;
         line-height: 40px;
         text-align: left;
-        padding: 0 10px;
+        /*padding: 0 10px;*/
         font-size: 15px;
         i,h1{
           display: inline-block;
@@ -91,17 +93,20 @@
       .goods-item{
         width: 100%;
         height: 100%;
-        position: relative;
+        /*position: relative;*/
         margin: 15px 0;
+        display: flex;
         .goods-pic{
+          text-align: left;
+          flex: 0 0 80px;
           img{
-            width: 89px;
+            width: 80px;
             height: auto;
           }
         }
         .goods-info{
+          flex: 1;
           text-align: left;
-          padding-left:15px;
           *{
             margin: 5px 0;
           }
@@ -117,34 +122,46 @@
             font-weight: bold;
             font-size: 14px;
           }
-          .goods-price{
-            span{
+          .goods-order{
+            display: flex;
+            align-items: center;
+            span.food-price{
               color: #C0C4CC;
               font-size: 12px;
+              flex: 0 0 63px;
               i{
                 color: darkred;
+                font-size: 13px;
+              }
+            }
+            .add-shopping-cart{
+              flex: 1;
+              text-align: right;
+              padding-right: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              a.minus-btn,a.add-btn{
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+                span{
+                  padding: 5px;
+                  font-size: 12px;
+                  background: #F7C376;
+                  -webkit-border-radius: 50%;
+                  -moz-border-radius: 50%;
+                  border-radius: 50%;
+                }
+              }
+              span.order-num{
+                font-size: 13px;
+                margin: 0 8px;
               }
             }
           }
         }
-        .add-shopping-cart{
-          a{
-            width: 25px;
-            height: 25px;
-            line-height: 25px;
-            position: absolute;
-            bottom: 15px;
-            right: 5%;
-            span{
-              padding: 5px;
-              font-size: 13px;
-              background: #F7C376;
-              -webkit-border-radius: 50%;
-              -moz-border-radius: 50%;
-              border-radius: 50%;
-            }
-          }
-        }
+
       }
     }
   }
