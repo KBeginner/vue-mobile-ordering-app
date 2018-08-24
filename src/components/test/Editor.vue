@@ -1,36 +1,58 @@
 <template>
-  <Editor :init="init" v-model="tinymceHtml"></Editor>
+  <div>
+    <quill-editor ref="myTextEditor"
+                   v-model="content"
+                   :options = "editorOption"
+                   @blur="onEditorBlur($event)"
+                   @focus="onEditorFocus($event)"
+                   @ready="onEditorReady($event)"
+                   @change="onEditorChange($event)">
+  </quill-editor>
+    <p>{{content}}</p>
+  </div>
 </template>
 
 <script>
-  /*基本配置*/
-  import tinymce from 'tinymce/tinymce'
-  import Editor from '@tinymce/tinymce-vue'     //引入tinymce组件
-  import 'tinymce/themes/modern/theme'
-  import 'tinymce/skins/lightgray/skin.min.css'
-  /*引入插件*/
-  import 'tinymce/plugins/table'
-  import 'tinymce/plugins/link'
-  import 'tinymce/plugins/help'
-
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
+  import 'quill/dist/quill.bubble.css'
+  import { quillEditor } from 'vue-quill-editor'
     export default {
         name: "Test",
       components:{
-        Editor
+        quillEditor
       },
       data() {
         return {
-          init: {
-            height: 300,   //设置高
-            // width: 800,     //设置宽
-            language_url:'/static/tinymce/zh_CN.js',    //引入语言包
-            plugins:'table link help',     //声明插件
-            toolbar:      //自定义顶部工具栏
-              'bold italic underline strikethrough | fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | undo redo | link unlink image code | removeformat',
-          },
-          tinymceHtml:''
+          content: '<h2>I am Example</h2>',
+          editorOption: {
+            // something config
+          }
         }
       },
+      methods:{
+        onEditorBlur(editor) {
+          console.log('editor blur!', editor)
+        },
+        onEditorFocus(editor) {
+          console.log('editor focus!', editor)
+        },
+        onEditorReady(editor) {
+          console.log('editor ready!', editor)
+        },
+        onEditorChange({ editor, html, text }) {
+          // console.log('editor change!', editor, html, text)
+          this.content = html
+        }
+      },
+      computed:{
+        editor() {
+          return this.$refs.myTextEditor.quillEditor
+        }
+      },
+      mounted(){
+        console.log('this is my editor', this.editor)
+      }
     }
 </script>
 
