@@ -1,16 +1,19 @@
 <template>
-  <div class="footer">
-    <div class="footer-left">
-      <div class="shopping-cart">
-        <span class="icon-shopping_cart"></span>
+  <div>
+    <div class="footer">
+      <div class="footer-left">
+        <div class="shopping-cart">
+          <span class="icon-shopping_cart"></span>
+        </div>
+        <div class="express-cost">
+          <span>另需{{costInfo.shipping_fee_tip}}</span>
+        </div>
       </div>
-      <div class="express-cost">
-        <span>另需{{costInfo.shipping_fee_tip}}</span>
+      <div class="footer-right">
+        <span>{{costInfo.min_price_tip}}</span>
       </div>
     </div>
-    <div class="footer-right">
-      <span>{{costInfo.min_price_tip}}</span>
-    </div>
+    <div class="shopping-list"></div>
   </div>
 </template>
 
