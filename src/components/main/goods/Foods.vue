@@ -142,21 +142,29 @@
               align-items: center;
               justify-content: flex-end;
               a.minus-btn,a.add-btn{
-                width: 20px;
-                height: 20px;
+                width: 18px;
+                height: 18px;
                 display: inline-block;
+                margin: 0 5px;
                 span{
                   padding: 5px;
                   font-size: 12px;
-                  background: #F7C376;
                   -webkit-border-radius: 50%;
                   -moz-border-radius: 50%;
                   border-radius: 50%;
                 }
               }
+              a.minus-btn span{
+                border: 1px solid #ccc;
+              }
+              a.add-btn span{
+                background: #F7C376;
+                border: 1px solid #F7C376;
+              }
               span.order-num{
                 font-size: 13px;
-                margin: 0 8px;
+                text-align: center;
+                margin-left:5px ;
               }
             }
           }

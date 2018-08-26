@@ -4,9 +4,11 @@
       <div class="footer-left">
         <div class="shopping-cart">
           <span class="icon-shopping_cart"></span>
+          <!--<i v-show="totalCount">{{totalCount}}</i>-->
         </div>
         <div class="express-cost">
-          <span>另需{{costInfo.shipping_fee_tip}}</span>
+          <!--<p class="totalPrice" v-show="totalCount">￥{{totalPrice}}</p>-->
+          <p class="others-need">另需{{costInfo.shipping_fee_tip}}</p>
         </div>
       </div>
       <div class="footer-right">
@@ -63,9 +65,12 @@
       }
       .express-cost{
         flex: 1;
-        line-height: 50px;
         color: #ccc;
         font-size: 12px;
+        .totalPrice{
+          font-size: 15px;
+          margin: 7px 0;
+        }
       }
     }
     .footer-right{

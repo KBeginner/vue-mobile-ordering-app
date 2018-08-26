@@ -5,7 +5,7 @@
         <ul class="menu">
           <li class="menu-item"
               @click="selectMenu(0)"
-              :class="{'is-current':currentIndex==0}">
+              :class="{'is-current':currentIndex===0}">
             <img :src="container.tag_icon"/>
             <a class="text">{{container.tag_name}}</a>
           </li>
@@ -13,7 +13,7 @@
               v-for="(food,index) in goods"
               :key="index"
               @click="selectMenu(index+1)"
-              :class="{'is-current':currentIndex==index+1}">
+              :class="{'is-current':currentIndex===index+1}">
             <img v-if="food.icon" :src="food.icon" />
             <a class="text">{{food.name}}</a>
           </li>
@@ -44,7 +44,8 @@
             listHeight:[],
             menuScroll:{},
             foodScroll:{},
-            scrollY:0
+            scrollY:0,
+            // currentIndex:0
           }
       },
       methods:{
@@ -61,7 +62,6 @@
             // console.log(position.y);     //从原点开始滚动，往下滚时 position.y为负值，向上滚为正
             this.scrollY = Math.abs(Math.round(position.y));  //取整再去绝对值
             // console.log(this.scrollY)
-            // console.log(this.currentIndex);
           })
         },
         calculateListHeight(){
@@ -73,12 +73,22 @@
             height+=foodList[i].clientHeight;
             this.listHeight.push(height);
           }
-          // console.log(this.listHeight)
+          console.log(this.listHeight)
         },
         selectMenu(index){
+          /*点击左侧菜单栏，右侧滚动到对应的品类*/
+          /*for (let i=0,len=this.listHeight.length; i<len; i++){
+            let height1 = this.listHeight[i];
+            let height2 = this.listHeight[i+1];
+            if ((this.scrollY>=height1 && this.scrollY<height2) || !height2){     //!height处理数组越界问题
+              this.currentIndex = i;
+            }
+          }*/
           let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
           let element = foodList[index];
           this.foodScroll.scrollToElement(element,250);   //scrollToElement是better-scroll滚动到目标元素的事件
+          console.log('click'+this.currentIndex);
+          console.log(this.listHeight)
         }
       },
       computed:{
@@ -105,12 +115,17 @@
           handler(){
             /*DOM渲染完后执行*/
             this.$nextTick(()=>{      //进行dom操作常用方法
-              this.initScroll();
               this.calculateListHeight()
             })
-          }
+          },
         }
       },
+      mounted(){
+        this.initScroll();
+        /*this.$nextTick(()=>{      //进行dom操作常用方法
+          this.calculateListHeight()
+        })*/
+      }
     }
 </script>
 
