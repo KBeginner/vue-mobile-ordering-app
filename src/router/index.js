@@ -5,7 +5,7 @@ import Goods from '../components/main/goods/Goods'
 import Rating from '../components/main/rating/Rating'
 import Seller from '../components/main/seller/Seller'
 
-import Test from '../components/test/Editor'
+import Test from '../components/test/ueditor'
 
 Vue.use(Router);
 

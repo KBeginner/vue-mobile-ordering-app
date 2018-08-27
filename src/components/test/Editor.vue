@@ -1,6 +1,6 @@
 <template>
   <div>
-    <quill-editor ref="myTextEditor"
+    <!--<quill-editor ref="myTextEditor"
                    v-model="content"
                    :options = "editorOption"
                    @blur="onEditorBlur($event)"
@@ -8,7 +8,8 @@
                    @ready="onEditorReady($event)"
                    @change="onEditorChange($event)">
   </quill-editor>
-    <p>{{content}}</p>
+    <p>{{content}}</p>-->
+
   </div>
 </template>
 

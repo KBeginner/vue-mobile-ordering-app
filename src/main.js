@@ -7,6 +7,12 @@ import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import {store} from './store'
 
+/*引入UEditor*/
+/*import '../static/UEditor/ueditor.config.js'
+import '../static/UEditor/ueditor.all.js'
+import '../static/UEditor/lang/zh-cn/zh-cn.js'
+import '../static/UEditor/ueditor.parse.js'*/
+
 Vue.config.productionTip = false;
 
 Vue.use(ElementUi);
