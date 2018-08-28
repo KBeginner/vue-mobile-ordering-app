@@ -1,6 +1,6 @@
 <template>
   <div>
-    <u-editor v-model="msg" @ready="ready"></u-editor>
+    <u-editor v-model="msg" :config="UEConfig" @ready="ready"></u-editor>
   </div>
 </template>
 
@@ -14,6 +14,10 @@
       data(){
           return{
             msg: '<h2><img src="http://img.baidu.com/hi/jx2/j_0003.gif"/>Vue + UEditor + v-model双向绑定</h2>',
+            UEConfig:{
+              initialFrameHeight:400,
+              initialFrameWidth:'100%'
+            }
           }
       },
       methods:{
@@ -24,6 +28,11 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+  .edui-editor{
+    .edui-default.edui-toolbar{
+      text-align: left !important;
+    }
+  }
 
 </style>

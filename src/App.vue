@@ -53,6 +53,11 @@ export default {
       }
     }
   }*/
+  .edui-editor{
+    .edui-default.edui-toolbar{
+      text-align: left !important;
+    }
+  }
 }
 
 </style>
