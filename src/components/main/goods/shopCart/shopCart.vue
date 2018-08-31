@@ -4,10 +4,10 @@
       <div class="footer-left">
         <div class="shopping-cart">
           <span class="icon-shopping_cart"></span>
-          <!--<i v-show="totalCount">{{totalCount}}</i>-->
+          <i class="goods-num" v-show="totalCount">{{totalCount}}</i>
         </div>
         <div class="express-cost">
-          <!--<p class="totalPrice" v-show="totalCount">￥{{totalPrice}}</p>-->
+          <p class="totalPrice" v-show="totalCount">￥{{totalPrice}}</p>
           <p class="others-need">另需{{costInfo.shipping_fee_tip}}</p>
         </div>
       </div>
@@ -22,6 +22,12 @@
 <script>
     export default {
         name: "shopCart",
+      data(){
+        return {
+          totalCount:10,
+          totalPrice:180
+        }
+      },
       computed:{
         costInfo(){
           return this.$store.getters.getHeaderInfo
@@ -62,14 +68,33 @@
           background: #606266;
           margin-top: -15px;
         }
+        .goods-num{
+          right: -5px;
+          font-size: 13px;
+          background: red;
+        }
       }
       .express-cost{
         flex: 1;
         color: #ccc;
         font-size: 12px;
+        position: relative;
+        padding-left: 10px;
         .totalPrice{
-          font-size: 15px;
-          margin: 7px 0;
+          position: absolute;
+          top: 10%;
+          font-size: 16px;
+          /*margin: 7px 0;*/
+        }
+        .others-need{
+          position: absolute;
+          top: 65%;
+          font-size: 12px;
+        -webkit-transform: translateY(-60%);
+        -moz-transform: translateY(-60%);
+        -ms-transform: translateY(-60%);
+        -o-transform: translateY(-60%);
+        transform: translateY(-60%);
         }
       }
     }

@@ -60,7 +60,8 @@
           for (let i = 0, len = this.listHeight.length; i < len; i++) {
             let height1 = this.listHeight[i];
             let height2 = this.listHeight[i+1];
-            if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {     //!height处理数组越界问题
+            // if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {     //!height处理数组越界问题
+            if(this.scrollY >= height1 && this.scrollY < height2) {
               return i
             }
           }
@@ -89,7 +90,8 @@
             click: true      //better-scroll默认点击事件为false
           });
           this.foodScroll = new BScroll(this.$refs.foodScroll, {     //商品页滚动
-            probeType: 3
+            probeType: 3,
+            click: true
           });
           /*给foodScroll添加一个监听事件on(事件名,执行的函数)*/
           this.foodScroll.on('scroll', (position) => {     //scroll为better-scroll自带滚动事件
@@ -108,7 +110,6 @@
               height += foodList[i].clientHeight;
               _this.listHeight.push(height);
             }
-            console.log(_this.listHeight)
           },500);
         },
 
@@ -123,9 +124,6 @@
       mounted(){
         this.initScroll();
         this.calculateListHeight()
-      },
-      watch: {
-
       },
     }
 </script>

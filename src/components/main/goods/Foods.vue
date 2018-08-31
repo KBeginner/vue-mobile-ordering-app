@@ -25,12 +25,11 @@
           <div class="goods-order">
             <span class="food-price"><i>{{'￥'+item.min_price}}</i>{{' / '+item.unit}}</span>
             <div class="add-shopping-cart">
-              <a class=" minus-btn"><span class="icon-minus"></span></a>
-              <span class="order-num">20</span>
-              <a class=" add-btn"><span class="icon-plus"></span></a>
+              <a class=" minus-btn" v-show="item.count>0" @click="decreaseOrder(item)"><span class="icon-minus"></span></a>
+              <span class="order-num" v-show="item.count>0">{{item.count}}</span>
+              <a class=" add-btn" @click="increaseOrder(item)"><span class="icon-plus"></span></a>
             </div>
           </div>
-
         </div>
       </el-row>
     </el-container>
@@ -38,19 +37,31 @@
 </template>
 
 <script>
+  import Vue from 'vue'
     export default {
         name: "Foods",
       props:['foodsData','containerData'],
       data(){
         return {
-
+          orderNum:0
         }
       },
       methods:{
-
+        increaseOrder(food){
+          if (!food.count){
+            Vue.set(food,'count',1);   //给food对象添加项，（obj, key, val）
+          } else{
+            food.count++
+          }
+        },
+        decreaseOrder(food){
+          food.count--
+        },
       },
       created(){
-        // console.log(foodsData)
+        // console.log(this.orderNum)
+      },
+      mounted(){
       }
     }
 </script>
@@ -79,7 +90,6 @@
         height: 40px;
         line-height: 40px;
         text-align: left;
-        /*padding: 0 10px;*/
         font-size: 15px;
         i,h1{
           display: inline-block;
@@ -93,7 +103,6 @@
       .goods-item{
         width: 100%;
         height: 100%;
-        /*position: relative;*/
         margin: 15px 0;
         display: flex;
         .goods-pic{
@@ -141,21 +150,27 @@
               display: flex;
               align-items: center;
               justify-content: flex-end;
+              margin: 0;
               a.minus-btn,a.add-btn{
                 width: 18px;
                 height: 18px;
                 display: inline-block;
                 margin: 0 5px;
+                z-index: 999;
                 span{
-                  padding: 5px;
+                  padding: 4px;
                   font-size: 12px;
                   -webkit-border-radius: 50%;
                   -moz-border-radius: 50%;
                   border-radius: 50%;
                 }
               }
-              a.minus-btn span{
-                border: 1px solid #ccc;
+              a.minus-btn{
+
+                span{
+                  border: 1px solid #ccc;
+                  color: #ccc;
+                }
               }
               a.add-btn span{
                 background: #F7C376;
