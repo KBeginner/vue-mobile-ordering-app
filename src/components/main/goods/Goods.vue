@@ -45,8 +45,27 @@
           menuScroll: {},
           foodScroll: {},
           scrollY: 0,
-          currentIndex:0,
+          // currentIndex:0,
         }
+      },
+      computed: {
+        goods() {
+          return this.$store.getters.getGoods
+        },
+        container() {
+          return this.$store.getters.getContainerData
+        },
+        /*计算商品列表滚动下标*/
+        currentIndex() {
+          for (let i = 0, len = this.listHeight.length; i < len; i++) {
+            let height1 = this.listHeight[i];
+            let height2 = this.listHeight[i+1];
+            if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {     //!height处理数组越界问题
+              return i
+            }
+          }
+          return 0;
+        },
       },
       methods: {
         getGoods(){
@@ -76,87 +95,38 @@
           this.foodScroll.on('scroll', (position) => {     //scroll为better-scroll自带滚动事件
             // console.log(position.y);     //从原点开始滚动，往下滚时 position.y为负值，向上滚为正
             this.scrollY = Math.abs(Math.round(position.y));  //取整再取绝对值
-            // console.log(this.scrollY)
           });
-         /* this.$nextTick(() => {      //进行dom操作常用方法
-            this.calculateListHeight()      //所有商品都展示后再计算高度
-          })*/
-          // console.log(this.scrollCurrent)
         },
-
         //计算分类区间的高度
         calculateListHeight() {
-          let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
-          let height = 0;
-          this.listHeight.push(height);
-          for (let i = 0, len = foodList.length; i < len; i++) {
-            height += foodList[i].clientHeight;
-            this.listHeight.push(height);
-          }
-          console.log(this.listHeight)
+          let _this = this;
+          setTimeout(function(){      //进行dom操作常用方法
+            let foodList = _this.$refs.foodScroll.getElementsByClassName('foods-list');
+            let height = 0;
+            _this.listHeight.push(height);
+            for (let i = 0, len = foodList.length; i < len; i++) {
+              height += foodList[i].clientHeight;
+              _this.listHeight.push(height);
+            }
+            console.log(_this.listHeight)
+          },500);
         },
 
         /*点击菜单栏，跳转对应的品类*/
         selectMenu(index) {
           let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
           let element = foodList[index];
-          this.currentIndex = index;
+          // this.currentIndex = index;
           this.foodScroll.scrollToElement(element, 250);   //scrollToElement是better-scroll滚动到目标元素的事件
-          // console.log(this.listHeight);
         },
       },
-      computed: {
-        goods() {
-          return this.$store.getters.getGoods
-        },
-        container() {
-          return this.$store.getters.getContainerData
-        },
-        /*计算商品列表滚动下标*/
-        scrollCurrent() {
-          for (let i = 0, len = this.listHeight.length; i < len; i++) {
-            let height1 = this.listHeight[i];
-            let height2 = this.listHeight[i+1];
-            if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {     //!height处理数组越界问题
-              return i
-            }
-          }
-          return 0;
-        },
+      mounted(){
+        this.initScroll();
+        this.calculateListHeight()
       },
       watch: {
-        /*goods: {
-          handler() {
-            /!*DOM渲染完后执行*!/
-            this.$nextTick(() => {      //进行dom操作常用方法
-              this.calculateListHeight()      //所有商品都展示后再计算高度
-            })
-          },
-        },*/
-        '$route': {
-          handler() {
-            /*this.$nextTick(() => {      //进行dom操作常用方法
-              this.initScroll();
-              this.calculateListHeight()      //所有商品都展示后再计算高度
-            })*/
-            this.calculateListHeight();
-          }
-        },
-        scrollY:{
-          handler(){
-            console.log(this.scrollCurrent);
-            console.log(this.listHeight)
-          }
-        }
+
       },
-      mounted() {
-        this.initScroll();
-        if (this.goods){
-          this.$nextTick(() => {      //进行dom操作常用方法
-            this.calculateListHeight()      //所有商品都展示后再计算高度
-          })
-        }
-      }
     }
 </script>
 
