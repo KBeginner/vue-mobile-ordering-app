@@ -3,16 +3,17 @@
     <div class="footer">
       <div class="footer-left">
         <div class="shopping-cart">
-          <span class="icon-shopping_cart"></span>
-          <i class="goods-num" v-show="totalCount">{{totalCount}}</i>
+          <span class="icon-shopping_cart" :class="{'highlight':totalCount>0}"></span>
+          <span class="goods-num" v-show="totalCount">{{totalCount}}</span>
         </div>
         <div class="express-cost">
           <p class="totalPrice" v-show="totalCount">￥{{totalPrice}}</p>
           <p class="others-need">另需{{costInfo.shipping_fee_tip}}</p>
         </div>
       </div>
-      <div class="footer-right">
-        <span>{{costInfo.min_price_tip}}</span>
+      <div class="footer-right" :class="{'highlight':totalCount>0}">
+        <span v-if="totalCount">去结算</span>
+        <span v-else>{{costInfo.min_price_tip}}</span>
       </div>
     </div>
     <div class="shopping-list"></div>
@@ -24,17 +25,44 @@
         name: "shopCart",
       data(){
         return {
-          totalCount:10,
-          totalPrice:180
+          totalCount:0,
+          totalPrice:0
         }
       },
       computed:{
         costInfo(){
           return this.$store.getters.getHeaderInfo
+        },
+        getOrderFoods(){
+          return this.$store.getters.getOrderFoods;
+        }
+      },
+      methods:{
+        setTotalCount(){
+          let count = 0;
+          this.getOrderFoods.forEach((food)=>{
+            count+=food.count;
+          });
+          this.totalCount = count;
+        },
+        setTotalPrice(){
+          let totalPrice = 0;
+          this.getOrderFoods.forEach((food)=>{
+            totalPrice+=food.count*food.min_price;
+          })
+          this.totalPrice = totalPrice;
         }
       },
       mounted(){
-        // console.log(this.costInfo)
+        // console.log(this.getOrderFoods)
+      },
+      watch:{
+        getOrderFoods:{
+          handler(){
+            this.setTotalCount();
+            this.setTotalPrice();
+          }
+        }
       }
     }
 </script>
@@ -54,6 +82,7 @@
       .shopping-cart{
         flex: 0 0 60px;
         text-align: center;
+        position: relative;
         .icon-shopping_cart{
           display: inline-block;
           width: 50px;
@@ -69,9 +98,20 @@
           margin-top: -15px;
         }
         .goods-num{
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          text-align: center;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          border-radius: 50%;
           right: -5px;
-          font-size: 13px;
-          background: red;
+          font-size: 14px;
+          background: #EB2727;
+          position: absolute;
+          top: -20px;
+          right: 5px;
         }
       }
       .express-cost{
@@ -79,7 +119,7 @@
         color: #ccc;
         font-size: 12px;
         position: relative;
-        padding-left: 10px;
+        /*padding-left: 10px;*/
         .totalPrice{
           position: absolute;
           top: 10%;
@@ -104,5 +144,10 @@
       font-size: 13px;
       color: #ccc;
     }
+  }
+  .highlight{
+    background: #DCC64D !important;
+    color: #303133 !important;
+    font-weight: bold;
   }
 </style>

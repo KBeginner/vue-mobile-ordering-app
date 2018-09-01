@@ -16,6 +16,9 @@
               :class="{'is-current':currentIndex===index+1}">
             <img v-if="food.icon" :src="food.icon" />
             <a class="text">{{food.name}}</a>
+            <span class="orderCount" v-show="calculateCount(food.spus)">
+              {{calculateCount(food.spus)}}
+            </span>
           </li>
         </ul>
       </div>
@@ -30,9 +33,9 @@
 </template>
 
 <script>
-  import Foods from './Foods'
+  import Foods from './compts/FoodList'
   import BScroll from 'better-scroll'
-  import shopCart from './shopCart/shopCart'
+  import shopCart from './compts/Cart'
     export default {
       name: "Goods",
       components: {
@@ -45,7 +48,6 @@
           menuScroll: {},
           foodScroll: {},
           scrollY: 0,
-          // currentIndex:0,
         }
       },
       computed: {
@@ -67,6 +69,9 @@
           }
           return 0;
         },
+        orderFoods(){
+          return this.$store.getters.getOrderFoods
+        }
       },
       methods: {
         getGoods(){
@@ -117,14 +122,31 @@
         selectMenu(index) {
           let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
           let element = foodList[index];
-          // this.currentIndex = index;
           this.foodScroll.scrollToElement(element, 250);   //scrollToElement是better-scroll滚动到目标元素的事件
         },
+
+        /*计算商品列表里加入购物车的商品数量*/
+        calculateCount(foods){
+          let listCount = 0;
+          foods.forEach((food)=>{
+            if (food.count>0){
+              listCount+=food.count;
+            }
+          });
+          return listCount
+        }
       },
       mounted(){
         this.initScroll();
-        this.calculateListHeight()
+        this.calculateListHeight();
       },
+      /*watch:{
+        orderFoods:{
+          handler(){
+            this.calculateCount()
+          }
+        }
+      }*/
     }
 </script>
 
@@ -150,6 +172,7 @@
             line-height: 22px;
             background: #F8F9F9;
             border-right: 1px solid #eee;
+            position: relative;
             img{
               width: 15px;
               height:auto;
@@ -162,6 +185,20 @@
               -webkit-box-orient:vertical;
               overflow: hidden;
               font-size: 13px;
+            }
+            .orderCount{
+              width: 18px;
+              height: 18px;
+              line-height: 18px;
+              text-align: center;
+              display: inline-block;
+              font-size: 12px;
+              background: #EB2727;
+              color: #eee;
+              border-radius: 50%;
+              position: absolute;
+              top: 2px;
+              right: 2px;
             }
           }
           .is-current{

@@ -24,11 +24,16 @@
           </div>
           <div class="goods-order">
             <span class="food-price"><i>{{'￥'+item.min_price}}</i>{{' / '+item.unit}}</span>
-            <div class="add-shopping-cart">
-              <a class=" minus-btn" v-show="item.count>0" @click="decreaseOrder(item)"><span class="icon-minus"></span></a>
+            <!--<div class="add-shopping-cart">
+              <transition name="move">
+                <a class=" minus-btn" v-show="item.count>0" @click="decreaseOrder(item)">
+                  <span class="icon-minus"></span>
+                </a>
+              </transition>
               <span class="order-num" v-show="item.count>0">{{item.count}}</span>
               <a class=" add-btn" @click="increaseOrder(item)"><span class="icon-plus"></span></a>
-            </div>
+            </div>-->
+            <CartControl :food="item"></CartControl>
           </div>
         </div>
       </el-row>
@@ -37,37 +42,54 @@
 </template>
 
 <script>
+  import CartControl from './CartControl'
   import Vue from 'vue'
     export default {
         name: "Foods",
       props:['foodsData','containerData'],
+      components:{
+        CartControl
+      },
       data(){
         return {
           orderNum:0
         }
       },
+      computed:{
+        orderFoods(){
+          let foods = [];
+          this.foodsData.forEach((foodList)=>{
+            foodList.spus.forEach((food)=>{
+              if (food.count>0){
+                foods.push(food)
+              }
+            })
+          });
+          return foods;
+        },
+      },
       methods:{
-        increaseOrder(food){
-          if (!food.count){
-            Vue.set(food,'count',1);   //给food对象添加项，（obj, key, val）
-          } else{
-            food.count++
-          }
-        },
-        decreaseOrder(food){
-          food.count--
-        },
+        setOrderFoods(){
+          this.$store.commit('setOrderFoods',this.orderFoods);
+        }
       },
       created(){
         // console.log(this.orderNum)
       },
       mounted(){
+      },
+      watch:{
+        orderFoods:{
+          handler(){
+            this.setOrderFoods();
+          }
+        },
       }
     }
 </script>
 
 <style scoped lang="less">
-  @import url('../../../icon/style.css');
+  @import url('../../../../icon/style.css');
   .goods-main{
     .special-column{
       overflow: hidden;
@@ -141,45 +163,6 @@
               i{
                 color: darkred;
                 font-size: 13px;
-              }
-            }
-            .add-shopping-cart{
-              flex: 1;
-              text-align: right;
-              padding-right: 10px;
-              display: flex;
-              align-items: center;
-              justify-content: flex-end;
-              margin: 0;
-              a.minus-btn,a.add-btn{
-                width: 18px;
-                height: 18px;
-                display: inline-block;
-                margin: 0 5px;
-                z-index: 999;
-                span{
-                  padding: 4px;
-                  font-size: 12px;
-                  -webkit-border-radius: 50%;
-                  -moz-border-radius: 50%;
-                  border-radius: 50%;
-                }
-              }
-              a.minus-btn{
-
-                span{
-                  border: 1px solid #ccc;
-                  color: #ccc;
-                }
-              }
-              a.add-btn span{
-                background: #F7C376;
-                border: 1px solid #F7C376;
-              }
-              span.order-num{
-                font-size: 13px;
-                text-align: center;
-                margin-left:5px ;
               }
             }
           }

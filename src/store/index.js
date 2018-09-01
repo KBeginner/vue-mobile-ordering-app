@@ -6,6 +6,7 @@ import goods from './module/goods'
 import rating from './module/rating'
 import seller from './module/seller'
 import container from './module/container'
+import order from './module/order'
 
 Vue.use(Vuex);
 export const store = new Vuex.Store({
@@ -14,6 +15,7 @@ export const store = new Vuex.Store({
     goods,
     rating,
     seller,
-    container
+    container,
+    order
   }
 });
