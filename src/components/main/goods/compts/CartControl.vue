@@ -1,5 +1,5 @@
 <template>
-  <div class="add-shopping-cart">
+  <div class="cart-control">
     <transition name="move">
       <a class=" minus-btn" v-show="food.count>0" @click="decreaseOrder(food)">
         <span class="icon-minus"></span>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
     export default {
         name: "CartControl",
       props:['food'],
@@ -32,8 +33,8 @@
 </script>
 
 <style scoped lang="less">
-  .add-shopping-cart{
-    flex: 1;
+  @import url('../../../../icon/style.css');
+  .cart-control{
     text-align: right;
     padding-right: 10px;
     display: flex;

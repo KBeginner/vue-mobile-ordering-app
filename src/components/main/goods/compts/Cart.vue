@@ -3,7 +3,8 @@
     <div class="footer">
       <div class="footer-left">
         <div class="shopping-cart">
-          <span class="icon-shopping_cart" :class="{'highlight':totalCount>0}"></span>
+          <span class="icon-shopping_cart"
+                :class="{'highlight':totalCount>0}" @click="cartListFn"></span>
           <span class="goods-num" v-show="totalCount">{{totalCount}}</span>
         </div>
         <div class="express-cost">
@@ -16,17 +17,22 @@
         <span v-else>{{costInfo.min_price_tip}}</span>
       </div>
     </div>
-    <div class="shopping-list"></div>
+    <CartList v-if="cartListActivity"></CartList>
   </div>
 </template>
 
 <script>
+  import CartList from './CartList'
     export default {
         name: "shopCart",
+      components:{
+        CartList
+      },
       data(){
         return {
           totalCount:0,
-          totalPrice:0
+          totalPrice:0,
+          cartListActivity:false
         }
       },
       computed:{
@@ -49,8 +55,11 @@
           let totalPrice = 0;
           this.getOrderFoods.forEach((food)=>{
             totalPrice+=food.count*food.min_price;
-          })
+          });
           this.totalPrice = totalPrice;
+        },
+        cartListFn(){
+          this.cartListActivity = !this.cartListActivity;
         }
       },
       mounted(){

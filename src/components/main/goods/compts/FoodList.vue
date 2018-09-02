@@ -24,16 +24,9 @@
           </div>
           <div class="goods-order">
             <span class="food-price"><i>{{'￥'+item.min_price}}</i>{{' / '+item.unit}}</span>
-            <!--<div class="add-shopping-cart">
-              <transition name="move">
-                <a class=" minus-btn" v-show="item.count>0" @click="decreaseOrder(item)">
-                  <span class="icon-minus"></span>
-                </a>
-              </transition>
-              <span class="order-num" v-show="item.count>0">{{item.count}}</span>
-              <a class=" add-btn" @click="increaseOrder(item)"><span class="icon-plus"></span></a>
-            </div>-->
-            <CartControl :food="item"></CartControl>
+            <div class="add-shopping-cart">
+              <CartControl :food="item"></CartControl>
+            </div>
           </div>
         </div>
       </el-row>
@@ -43,7 +36,6 @@
 
 <script>
   import CartControl from './CartControl'
-  import Vue from 'vue'
     export default {
         name: "Foods",
       props:['foodsData','containerData'],
@@ -164,6 +156,9 @@
                 color: darkred;
                 font-size: 13px;
               }
+            }
+            .add-shopping-cart{
+              flex: 1;
             }
           }
         }

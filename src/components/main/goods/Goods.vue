@@ -140,13 +140,6 @@
         this.initScroll();
         this.calculateListHeight();
       },
-      /*watch:{
-        orderFoods:{
-          handler(){
-            this.calculateCount()
-          }
-        }
-      }*/
     }
 </script>
 
