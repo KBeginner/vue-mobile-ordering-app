@@ -17,7 +17,9 @@
         <span v-else>{{costInfo.min_price_tip}}</span>
       </div>
     </div>
-    <CartList v-if="cartListActivity"></CartList>
+    <transition name="cartList">
+      <CartList v-if="cartListActivity" @cartList="closeCartList($event)"></CartList>
+    </transition>
   </div>
 </template>
 
@@ -59,11 +61,17 @@
           this.totalPrice = totalPrice;
         },
         cartListFn(){
-          this.cartListActivity = !this.cartListActivity;
+          if (this.totalCount>0){
+            this.cartListActivity = !this.cartListActivity;
+          }else{
+            this.cartListActivity = false;
+          }
+        },
+        closeCartList(val){
+          this.cartListActivity = val;
         }
       },
       mounted(){
-        // console.log(this.getOrderFoods)
       },
       watch:{
         getOrderFoods:{
@@ -158,5 +166,13 @@
     background: #DCC64D !important;
     color: #303133 !important;
     font-weight: bold;
+  }
+  .cartList-enter-active,.cartList-leave-active{
+    transition: .5s all;
+    transform: translateY(0);
+  }
+  .cartList-enter,.cartList-leave-to{
+    opacity: 0;
+    transform: translateY(100%);
   }
 </style>

@@ -7,9 +7,9 @@
                     ref="cartList">
         <div class="list-header">
           <span class="pocket">一号口袋</span>
-          <div class="clearCart">
+          <div class="clearCart" @click="clearCart">
             <label class="el-icon-delete"></label>
-            <span @click="clearCart">清空购物车</span>
+            <span>清空购物车</span>
           </div>
         </div>
         <el-container direction="vertical" class="cart-foods-list">
@@ -35,6 +35,7 @@
 <script>
   import CartControl from './CartControl'
   import BScroll from 'better-scroll'
+  import Vue from 'vue'
     export default {
         name: "CartList",
       components:{
@@ -57,9 +58,6 @@
             return []
           }
         },
-        /*clearCartFoods(){
-          // this.orderFoods
-        }*/
       },
       methods:{
         listScroll(){
@@ -68,8 +66,11 @@
           })
         },
         clearCart(){
-          // this.$store.commit('setOrderFoods',[])
-        }
+          this.orderFoods.forEach((food)=>{
+            Vue.delete(food,'count');
+          });
+          this.$emit('cartList',false)
+        },
       },
       mounted(){
         // this.listScroll()
@@ -115,9 +116,7 @@
           text-align: left;
         }
         .clearCart{
-          /*flex: 0;*/
           display: inline-block;
-          line-height: 25px;
           .el-icon-delete{
           }
         }
