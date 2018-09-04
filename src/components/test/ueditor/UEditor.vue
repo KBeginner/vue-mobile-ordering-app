@@ -29,17 +29,23 @@
       const _this = this;
       this.editor = UE.delEditor("editor");
       this.editor = UE.getEditor('editor',this.config);
+      this.setContent()+23
     },
     destoryed() {
       this.editor.destory();
     },
     methods:{
+      setContent(){
+        this.editor.ready(function(){
+          this.editor.setContent('<p>hello!</p>');
+        });
+      },
       getUEContent: function(){
        return this.editor.getContent();
       },
       getContentTxt: function(){
         return this.editor.getContentTxt();
-      }
+      },
     }
   }
 </script>
