@@ -1,10 +1,8 @@
 <template>
   <div class="cart-list">
     <div class="cart-list-main">
-      <div class="list-top" v-if="topInfo.discounts2.length>0">{{topInfo.discounts2[0].info}}</div>
-      <el-container direction="vertical"
-                    v-if="orderFoods.length>0"
-                    ref="cartList">
+      <div class="list-top">{{topInfo}}</div>
+      <el-container direction="vertical" v-if="orderFoods.length>0">
         <div class="list-header">
           <span class="pocket">一号口袋</span>
           <div class="clearCart" @click="clearCart">
@@ -12,7 +10,7 @@
             <span>清空购物车</span>
           </div>
         </div>
-        <el-container direction="vertical" class="cart-foods-list">
+        <el-container direction="vertical" class="cart-foods-list" ref="cartList">
           <div class="list-content" v-for="food in orderFoods">
             <div class="foods-name-col">
               <div class="food-name">{{food.name}}</div>
@@ -25,10 +23,10 @@
             </div>
           </div>
         </el-container>
-        <!--<div class="list-bottom">bottom</div>-->
       </el-container>
       <div class="cart-nothing" v-else>购物车为空</div>
     </div>
+    <div class="bg-fade-mask" @click="closeCartList"></div>
   </div>
 </template>
 
@@ -48,7 +46,13 @@
       },
       computed:{
         topInfo(){
-          return this.$store.getters.getHeaderInfo;
+          let data = this.$store.getters.getHeaderInfo;
+          if(!data.discounts2.length>0){
+            return ''
+          }else{
+            return data.discounts2[0].info;
+          }
+          // return data;
         },
         orderFoods(){
           let foods = this.$store.getters.getOrderFoods;
@@ -61,19 +65,28 @@
       },
       methods:{
         listScroll(){
+          /*this.$nextTick(()=>{
+            this.cartListScroll = new BScroll(this.$refs.cartList,{
+              click:true,
+            })
+            console.log(1111111)
+          });*/
           this.cartListScroll = new BScroll(this.$refs.cartList,{
             click:true,
           })
+          console.log(22222)
         },
         clearCart(){
           this.orderFoods.forEach((food)=>{
             Vue.delete(food,'count');
           });
-          this.$emit('cartList',false)
         },
+        closeCartList(){
+          this.$emit('closeList',false)
+        }
       },
       mounted(){
-        // this.listScroll()
+        this.listScroll()
       }
     }
 </script>
@@ -85,7 +98,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,.5);
-    z-index: -1;
+    z-index: -2;
     .cart-list-main{
       width: 100%;
       height: 60vh;
@@ -93,6 +106,7 @@
       bottom: 0;
       background: #fff;
       color: #606266;
+      z-index: 0;
       .list-top{
         height: 3.5vh;
         line-height: 3.5vh;
@@ -169,6 +183,12 @@
         font-weight: bold;
         color: #ccc;
       }
+    }
+    .bg-fade-mask{
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
   }
 </style>

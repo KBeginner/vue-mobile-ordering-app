@@ -18,7 +18,7 @@
       </div>
     </div>
     <transition name="cartList">
-      <CartList v-if="cartListActivity" @cartList="closeCartList($event)"></CartList>
+      <CartList v-if="cartListActivity" @closeList="closeCartList($event)"></CartList>
     </transition>
   </div>
 </template>
