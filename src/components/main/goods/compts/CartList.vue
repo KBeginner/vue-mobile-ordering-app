@@ -65,15 +65,21 @@
       },
       methods:{
         listScroll(){
-          /*this.$nextTick(()=>{
+          this.$nextTick(()=>{
             this.cartListScroll = new BScroll(this.$refs.cartList,{
               click:true,
-            })
+            });
             console.log(1111111)
-          });*/
-          this.cartListScroll = new BScroll(this.$refs.cartList,{
+          });
+          setTimeout(()=>{
+            this.cartListScroll = new BScroll(this.$refs.cartList,{
+              click:true,
+            });
+            console.log(1111111)
+          },1000);
+          /*this.cartListScroll = new BScroll(this.$refs.cartList,{
             click:true,
-          })
+          })*/
           console.log(22222)
         },
         clearCart(){
