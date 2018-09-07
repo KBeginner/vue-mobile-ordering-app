@@ -10,8 +10,21 @@
             <span>清空购物车</span>
           </div>
         </div>
-        <el-container direction="vertical" class="cart-foods-list" ref="cartList">
-          <div class="list-content" v-for="food in orderFoods">
+        <el-container direction="vertical" class="cart-foods-list" ref="cartScrollList">
+          <ul>
+            <li class="list-content" v-for="food in orderFoods">
+              <div class="foods-name-col">
+                <div class="food-name">{{food.name}}</div>
+                <div class="food-extra" v-if="food.description">{{food.description}}</div>
+                <div class="food-extra" v-else>{{food.unit}}</div>
+              </div>
+              <div class="foods-price">{{food.min_price}}￥</div>
+              <div class="cart-control">
+                <CartControl :food="food"></CartControl>
+              </div>
+            </li>
+          </ul>
+          <!--<div class="list-content" v-for="food in orderFoods">
             <div class="foods-name-col">
               <div class="food-name">{{food.name}}</div>
               <div class="food-extra" v-if="food.description">{{food.description}}</div>
@@ -21,7 +34,7 @@
             <div class="cart-control">
               <CartControl :food="food"></CartControl>
             </div>
-          </div>
+          </div>-->
         </el-container>
       </el-container>
       <div class="cart-nothing" v-else>购物车为空</div>
@@ -41,7 +54,7 @@
       },
       data(){
         return{
-          cartListScroll:{},
+          // cartListScroll:null,
         }
       },
       computed:{
@@ -65,22 +78,30 @@
       },
       methods:{
         listScroll(){
-          this.$nextTick(()=>{
-            this.cartListScroll = new BScroll(this.$refs.cartList,{
-              click:true,
-            });
-            console.log(1111111)
-          });
-          setTimeout(()=>{
-            this.cartListScroll = new BScroll(this.$refs.cartList,{
-              click:true,
-            });
-            console.log(1111111)
-          },1000);
-          /*this.cartListScroll = new BScroll(this.$refs.cartList,{
-            click:true,
-          })*/
-          console.log(22222)
+          if(this.orderFoods.length>0){
+            /*this.$nextTick(()=>{
+              if(!this.cartListScroll){
+                console.log(11111111111);
+                this.cartListScroll = new BScroll(this.$refs.cartScrollList,{
+                  click:true,
+                });
+              }else{
+                this.cartListScroll.refresh();
+                console.log(222222222222)
+              }
+            });*/
+            setTimeout(()=>{
+              if(!this.cartListScroll){
+                console.log(11111111111);
+                this.cartListScroll = new BScroll(this.$refs.cartScrollList,{
+                  click:true,
+                });
+              }else{
+                this.cartListScroll.refresh();
+                console.log(222222222222)
+              }
+            },800)
+          }
         },
         clearCart(){
           this.orderFoods.forEach((food)=>{

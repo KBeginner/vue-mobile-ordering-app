@@ -105,7 +105,7 @@
           });
         },
         //计算分类区间的高度
-        calculateListHeight() {
+        calculateListHeight(){
           let _this = this;
           setTimeout(function(){      //进行dom操作常用方法
             let foodList = _this.$refs.foodScroll.getElementsByClassName('foods-list');
