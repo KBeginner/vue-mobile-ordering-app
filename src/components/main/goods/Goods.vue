@@ -155,6 +155,7 @@
       overflow: auto;
       .goods-menu{
         flex: 0 0 85px;
+        margin-bottom: 20px;
         .menu{
           .menu-item{
             padding: 15px 10px;

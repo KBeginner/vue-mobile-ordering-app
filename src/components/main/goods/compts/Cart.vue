@@ -3,9 +3,11 @@
     <div class="footer">
       <div class="footer-left">
         <div class="shopping-cart">
-          <span class="icon-shopping_cart"
-                :class="{'highlight':totalCount>0}" @click="cartListFn"></span>
-          <span class="goods-num" v-show="totalCount">{{totalCount}}</span>
+          <a @click="cartListFn">
+            <span class="icon-shopping_cart"
+                  :class="{'highlight':totalCount>0}"></span>
+            <span class="goods-num" v-show="totalCount">{{totalCount}}</span>
+          </a>
         </div>
         <div class="express-cost">
           <p class="totalPrice" v-show="totalCount">￥{{totalPrice}}</p>
@@ -72,6 +74,7 @@
         }
       },
       mounted(){
+        this.setTotalCount()
       },
       watch:{
         getOrderFoods:{

@@ -10,7 +10,7 @@
             <span>清空购物车</span>
           </div>
         </div>
-        <el-container direction="vertical" class="cart-foods-list" ref="cartScrollList">
+        <div class="cart-foods-list" ref="cartScrollList">
           <ul>
             <li class="list-content" v-for="food in orderFoods">
               <div class="foods-name-col">
@@ -23,19 +23,9 @@
                 <CartControl :food="food"></CartControl>
               </div>
             </li>
+            <li class="list-end"></li>
           </ul>
-          <!--<div class="list-content" v-for="food in orderFoods">
-            <div class="foods-name-col">
-              <div class="food-name">{{food.name}}</div>
-              <div class="food-extra" v-if="food.description">{{food.description}}</div>
-              <div class="food-extra" v-else>{{food.unit}}</div>
-            </div>
-            <div class="foods-price">{{food.min_price}}￥</div>
-            <div class="cart-control">
-              <CartControl :food="food"></CartControl>
-            </div>
-          </div>-->
-        </el-container>
+        </div>
       </el-container>
       <div class="cart-nothing" v-else>购物车为空</div>
     </div>
@@ -79,28 +69,15 @@
       methods:{
         listScroll(){
           if(this.orderFoods.length>0){
-            /*this.$nextTick(()=>{
+            this.$nextTick(()=>{
               if(!this.cartListScroll){
-                console.log(11111111111);
                 this.cartListScroll = new BScroll(this.$refs.cartScrollList,{
                   click:true,
                 });
               }else{
                 this.cartListScroll.refresh();
-                console.log(222222222222)
               }
-            });*/
-            setTimeout(()=>{
-              if(!this.cartListScroll){
-                console.log(11111111111);
-                this.cartListScroll = new BScroll(this.$refs.cartScrollList,{
-                  click:true,
-                });
-              }else{
-                this.cartListScroll.refresh();
-                console.log(222222222222)
-              }
-            },800)
+            });
           }
         },
         clearCart(){
@@ -166,7 +143,6 @@
         height: 53vh;
         overflow: hidden;
         padding: 10px 0;
-        padding-bottom: 20px;
         .list-content{
           min-height: 50px;
           line-height: 50px;
@@ -202,6 +178,10 @@
           .cart-control{
             flex: 0 100px;
           }
+        }
+        .list-end{
+          display: block;
+          height: 40px;
         }
       }
       .cart-nothing{

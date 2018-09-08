@@ -67,8 +67,8 @@
     background: rgba(0,0,0,.6);
     .dialog-content{
       margin: 10% auto;
-      width: 80%;
-      height: 65%;
+      width: 80vw;
+      height: 58vh;
       border-radius: 10px;
       position: relative;
       padding: 50px 20px;
