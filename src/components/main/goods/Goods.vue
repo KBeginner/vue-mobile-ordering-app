@@ -23,8 +23,13 @@
         </ul>
       </div>
       <div ref="foodScroll">
-        <Foods :containerData="container" :foodsData="goods" ></Foods>
+        <Foods :containerData="container"
+               :foodsData="goods" @showDetail="showFoodDetail($event)"></Foods>
       </div>
+      <transition name="detail">
+        <food-detail v-show="foodDetailActivity"
+                     :checkOut="foodDetailActivity" @closeDetail="closeDetail($event)"></food-detail>
+      </transition>
     </el-container>
     <el-footer class="goods-footer">
       <shop-cart></shop-cart>
@@ -36,11 +41,13 @@
   import Foods from './compts/FoodList'
   import BScroll from 'better-scroll'
   import shopCart from './compts/Cart'
+  import FoodDetail from './compts/FoodDetail'
     export default {
       name: "Goods",
       components: {
         Foods,
-        shopCart
+        shopCart,
+        FoodDetail
       },
       data() {
         return {
@@ -48,6 +55,7 @@
           menuScroll: {},
           foodScroll: {},
           scrollY: 0,
+          foodDetailActivity:false,
         }
       },
       computed: {
@@ -134,12 +142,29 @@
             }
           });
           return listCount
+        },
+
+        /*显示商品详情*/
+        showFoodDetail(value){
+          this.foodDetailActivity = value;
+        },
+        /*关闭商品详情*/
+        closeDetail(val){
+          this.foodDetailActivity = val;
         }
       },
       mounted(){
         this.initScroll();
         this.calculateListHeight();
       },
+      watch:{
+        '$route':{
+          handler(){
+            this.initScroll();
+            this.calculateListHeight();
+          }
+        }
+      }
     }
 </script>
 
@@ -204,6 +229,23 @@
       .goods-main{
         flex: 1;
       }
+      .detail-enter-active,.detail-leave-active{
+        transition: all .5s linear;
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+      }
+      .detail-enter, .detail-leave-to{
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transform: translateX(100%);
+      }
     }
     .goods-footer{
       width: 100%;
@@ -212,7 +254,7 @@
       bottom: 0;
       color: #fff;
       padding: 0;
-      z-index: 99;
+      z-index: 3;
     }
   }
 </style>

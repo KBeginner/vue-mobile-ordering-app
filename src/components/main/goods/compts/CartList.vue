@@ -83,6 +83,7 @@
         clearCart(){
           this.orderFoods.forEach((food)=>{
             Vue.delete(food,'count');
+            this.closeCartList()
           });
         },
         closeCartList(){

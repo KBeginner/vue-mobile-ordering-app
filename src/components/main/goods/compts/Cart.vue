@@ -14,10 +14,12 @@
           <p class="others-need">另需{{costInfo.shipping_fee_tip}}</p>
         </div>
       </div>
-      <div class="footer-right" :class="{'highlight':totalCount>0}">
+      <a class="footer-right"
+         :class="{'highlight':totalCount>0}"
+         @clic="goToBuy">
         <span v-if="totalCount">去结算</span>
         <span v-else>{{costInfo.min_price_tip}}</span>
-      </div>
+      </a>
     </div>
     <transition name="cartList">
       <CartList v-if="cartListActivity" @closeList="closeCartList($event)"></CartList>
@@ -71,6 +73,9 @@
         },
         closeCartList(val){
           this.cartListActivity = val;
+        },
+        goToBuy(){
+          console.log('去下单')
         }
       },
       mounted(){
@@ -81,6 +86,13 @@
           handler(){
             this.setTotalCount();
             this.setTotalPrice();
+          }
+        },
+        totalCount:{
+          handler(){
+            if(this.totalCount<=0){
+              this.cartListFn()
+            }
           }
         }
       }
@@ -163,6 +175,7 @@
       line-height: 50px;
       font-size: 13px;
       color: #ccc;
+      display: block;
     }
   }
   .highlight{
@@ -171,8 +184,9 @@
     font-weight: bold;
   }
   .cartList-enter-active,.cartList-leave-active{
-    transition: .5s all;
+    transition: .5s all linear;
     transform: translateY(0);
+    opacity: 1;
   }
   .cartList-enter,.cartList-leave-to{
     opacity: 0;
