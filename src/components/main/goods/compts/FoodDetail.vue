@@ -30,6 +30,11 @@
           </div>
         </div>
       </div>
+      <div class="food-rating">
+        <ul>
+          <li>评论1</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
