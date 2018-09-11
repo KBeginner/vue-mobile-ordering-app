@@ -28,7 +28,8 @@
       </div>
       <transition name="detail">
         <food-detail v-show="foodDetailActivity"
-                     :checkOut="foodDetailActivity" @closeDetail="closeDetail($event)"></food-detail>
+                     :checkOut="foodDetailActivity"
+                     @closeDetail="closeDetail($event)"></food-detail>
       </transition>
     </el-container>
     <el-footer class="goods-footer">
@@ -97,6 +98,7 @@
               this.$message('哎呀！出错啦。')
             })
         },
+
         /*滚动方法*/
         initScroll() {
           this.menuScroll = new BScroll(this.$refs.menuScroll, {     //菜单栏滚动
@@ -112,6 +114,7 @@
             this.scrollY = Math.abs(Math.round(position.y));  //取整再取绝对值
           });
         },
+
         //计算分类区间的高度
         calculateListHeight(){
           let _this = this;
@@ -229,22 +232,21 @@
       .goods-main{
         flex: 1;
       }
-      .detail-enter-active,.detail-leave-active{
-        transition: all .5s linear;
-        -webkit-transform: translateX(0);
-        -moz-transform: translateX(0);
-        -ms-transform: translateX(0);
-        -o-transform: translateX(0);
-        transform: translateX(0);
+      .detail-enter-active{
+        transition: all .7s;
+        transform: scale(100%);
         opacity: 1;
       }
-      .detail-enter, .detail-leave-to{
+      .detail-enter{
         opacity: 0;
-        -webkit-transform: translateX(100%);
-        -moz-transform: translateX(100%);
-        -ms-transform: translateX(100%);
-        -o-transform: translateX(100%);
-        transform: translateX(100%);
+        transform: scale(0);
+      }
+      .detail-leave-active{
+        transition: all .7s;
+        opacity: .7;
+      }
+      .detail-leave-to{
+        opacity: 0;
       }
     }
     .goods-footer{

@@ -178,10 +178,10 @@
             span.food-price{
               color: #C0C4CC;
               font-size: 12px;
-              flex: 0 0 63px;
+              flex: 0 0 70px;
               i{
                 color: darkred;
-                font-size: 13px;
+                font-size: 15px;
               }
             }
             .add-shopping-cart{

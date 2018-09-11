@@ -63,8 +63,8 @@
       }
     }
     a.add-btn span{
-      background: #F7C376;
-      border: 1px solid #F7C376;
+      background: #DCC64D ;
+      border: 1px solid #DCC64D ;
     }
     span.order-num{
       font-size: 13px;

@@ -26,7 +26,9 @@
           <span class="food-price"><i>{{'￥'+foodDetail.min_price}}</i>{{' / '+foodDetail.unit}}</span>
           <div class="add-shopping-cart">
             <CartControl v-if="foodDetail.count>0" :food="foodDetail"></CartControl>
-            <div v-else class="select-property"><span>选规格</span></div>
+            <div v-else class="select-property">
+              <span class="select-btn" @click="selectProperty(foodDetail)">选规格</span>
+            </div>
           </div>
         </div>
       </div>
@@ -36,10 +38,12 @@
         </ul>
       </div>
     </div>
+    <div class="bg-fade" @click="closeDetail"></div>
   </div>
 </template>
 
 <script>
+  import Vue from 'vue'
   import CartControl from './CartControl'
     export default {
         name: "FoodDetail",
@@ -63,6 +67,13 @@
       methods:{
         closeDetail(){
           this.$emit('closeDetail',false)
+        },
+        selectProperty(food){
+          if(!food.count){
+            Vue.set(food,'count',1)
+          }else{
+            food.count++;
+          }
         }
       },
       watch:{
@@ -93,6 +104,7 @@
       background-size: 100% 100% !important;
       background: #fff;
       padding: 15px;
+      z-index: 4;
       .top{
         position: relative;
         .operator-btn{
@@ -104,10 +116,10 @@
             width: 30px;
             height: 30px;
             display: inline-block;
-            line-height: 30px;
+            line-height: 32px;
             text-align: center;
             color: #f5f5f5;
-            background: rgba(0,0,0,.6);
+            background: rgba(0,0,0,.5);
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
             border-radius: 50%;
@@ -130,11 +142,9 @@
       .goods-info{
         flex: 1;
         text-align: left;
-        *{
-          margin: 5px 0;
-        }
         .goods-sale-record{
           color: #C0C4CC;
+          margin: 5px 0;
           span{
             font-size: .8em;
             margin-right: 5px;
@@ -143,18 +153,19 @@
         h1{
           line-height: 20px;
           font-weight: bold;
-          /*font-size: 14px;*/
+          margin: 5px 0;
         }
         .goods-order{
           display: flex;
           align-items: center;
+          height: 40px;
+          margin: 0;
           span.food-price{
             color: #C0C4CC;
-            font-size: 12px;
-            flex: 0 0 63px;
+            font-size: 16px;
+            flex: 0 0 75px;
             i{
               color: darkred;
-              font-size: 13px;
             }
           }
           .add-shopping-cart{
@@ -163,14 +174,31 @@
             .select-property{
               span{
                 display: inline-block;
-                width:60px;
-                background: #eee;
+                width:70px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                background: #DCC64D ;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: bold;
               }
             }
           }
         }
       }
 
+    }
+    .bg-fade{
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
     }
   }
 </style>
