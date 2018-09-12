@@ -34,7 +34,9 @@
       </div>
       <div class="food-rating">
         <ul>
-          <li>评论1</li>
+          <li v-for="(item,index) in foodDetail.rating">
+            {{item.like_ratio_desc}}
+          </li>
         </ul>
       </div>
     </div>
@@ -95,6 +97,11 @@
     bottom: 0;
     z-index: 2;
     background: rgba(0,0,0,.6);
+    -webkit-transform: translateY();
+    -moz-transform: translateY();
+    -ms-transform: translateY();
+    -o-transform: translateY();
+    transform: translateY();
     .foodDetail-main{
       margin: 10% auto;
       width: 80vw;
