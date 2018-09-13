@@ -47,6 +47,7 @@
 <script>
   import Vue from 'vue'
   import CartControl from './CartControl'
+  import BScroll from 'better-scroll'
     export default {
         name: "FoodDetail",
       props:['checkOut'],
