@@ -35,6 +35,7 @@
       <div class="food-rating">
         <ul>
           <li v-for="(item,index) in foodDetail.rating">
+            <span><img :src="item.user_icon"/></span>
             {{item.like_ratio_desc}}
           </li>
         </ul>
