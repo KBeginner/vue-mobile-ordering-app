@@ -36,7 +36,7 @@
         <ul>
           <li v-for="(item,index) in foodDetail.rating">
             <span><img :src="item.user_icon"/></span>
-            {{item.like_ratio_desc}}
+            item.like_ratio_desc
           </li>
         </ul>
       </div>
@@ -53,7 +53,7 @@
         name: "FoodDetail",
       props:['checkOut'],
       components:{
-        CartControl
+        CartControl,
       },
       data(){
         return{
