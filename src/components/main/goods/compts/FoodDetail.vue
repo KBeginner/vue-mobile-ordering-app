@@ -1,52 +1,54 @@
 <template>
   <div class="foodDetail">
-    <div class="foodDetail-main" ref="detail">
-      <div class="detail-content">
-        <div class="top">
-          <el-row class="operator-btn">
-            <el-col :span="18" class="close">
-              <a class="btn" @click="closeDetail"><span class="el-icon-close"></span></a>
-            </el-col>
-            <el-col :span="3">
-              <a class="btn"><span class="el-icon-share"></span></a>
-            </el-col>
-            <el-col :span="3">
-              <a class="btn"><span class="el-icon-more"></span></a>
-            </el-col>
-          </el-row>
-          <div class="food-pic">
-            <img :src="foodDetail.picture"/>
+    <div class="foodDetail-main" ref="foodDetail">
+      <div>
+        <div class="detail-content">
+          <div class="top">
+            <el-row class="operator-btn">
+              <el-col :span="18" class="close">
+                <a class="btn" @click="closeDetail"><span class="el-icon-close"></span></a>
+              </el-col>
+              <el-col :span="3">
+                <a class="btn"><span class="el-icon-share"></span></a>
+              </el-col>
+              <el-col :span="3">
+                <a class="btn"><span class="el-icon-more"></span></a>
+              </el-col>
+            </el-row>
+            <div class="food-pic">
+              <img :src="foodDetail.picture"/>
+            </div>
           </div>
-        </div>
-        <div class="goods-info">
-          <h1>{{foodDetail.name}}</h1>
-          <div class="goods-sale-record">
-            <span>月销量 {{foodDetail.month_saled}}</span>
-          </div>
-          <div class="goods-order">
-            <span class="food-price"><i>{{'￥'+foodDetail.min_price}}</i>{{' / '+foodDetail.unit}}</span>
-            <div class="add-shopping-cart">
-              <CartControl v-if="foodDetail.count>0" :food="foodDetail"></CartControl>
-              <div v-else class="select-property">
-                <span class="select-btn" @click="selectProperty(foodDetail)">选规格</span>
+          <div class="goods-info">
+            <h1>{{foodDetail.name}}</h1>
+            <div class="goods-sale-record">
+              <span>月销量 {{foodDetail.month_saled}}</span>
+            </div>
+            <div class="goods-order">
+              <span class="food-price"><i>{{'￥'+foodDetail.min_price}}</i>{{' / '+foodDetail.unit}}</span>
+              <div class="add-shopping-cart">
+                <CartControl v-if="foodDetail.count>0" :food="foodDetail"></CartControl>
+                <div v-else class="select-property">
+                  <span class="select-btn" @click="selectProperty(foodDetail)">选规格</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="food-rating">
-        <el-row v-if="foodDetail.rating" class="comment-title">
-          <el-col :span="18">
-            <span>{{foodDetail.rating.title}}</span>
-            (
-            <span>{{foodDetail.rating.like_ratio_desc}}</span>
-            <span class="praise-rate">{{foodDetail.rating.like_ratio}}</span>
-            )
-          </el-col>
-          <el-col :span="5">{{foodDetail.rating.snd_title}}</el-col>
-          <el-col :span="1"></el-col>
-        </el-row>
-        <comment-list :data="foodDetail"></comment-list>
+        <div class="food-rating">
+          <el-row v-if="foodDetail.rating" class="comment-title">
+            <el-col :span="18">
+              <span>{{foodDetail.rating.title}}</span>
+              (
+              <span>{{foodDetail.rating.like_ratio_desc}}</span>
+              <span class="praise-rate">{{foodDetail.rating.like_ratio}}</span>
+              )
+            </el-col>
+            <el-col class="more-rating" :span="5">{{foodDetail.rating.snd_title}}</el-col>
+            <el-col :span="1"><span class="el-icon-arrow-right"></span></el-col>
+          </el-row>
+          <comment-list :data="foodDetail"></comment-list>
+        </div>
       </div>
     </div>
     <div class="bg-fade" @click="closeDetail"></div>
@@ -90,26 +92,26 @@
           }
         },
         bScroll(){
-          if(this.foodDetail){
-            this.$nextTick( ()=>{
-              if(!this.detailScroll){
-                this.detailScroll = new BScroll(this.$refs.detail,{
-                  click:true
-                })
-              }else{
-                this.detailScroll.refresh()
-              }
-            });
-          }
+          this.$nextTick( ()=>{
+            if(!this.detailScroll){
+              this.detailScroll = new BScroll(this.$refs.foodDetail,{
+                click:true,
+              });
+            }else{
+              this.detailScroll.refresh()
+            }
+          });
         }
       },
       mounted(){
-        this.bScroll();
+        // this.bScroll();
       },
       watch:{
         getCheckOut:{
           handler(){
-            console.log(this.foodDetail.name)
+            if(this.getCheckOut){
+              this.bScroll();
+            }
           }
         }
       }
@@ -139,7 +141,7 @@
       position: relative;
       background-size: 100% 100% !important;
       z-index: 4;
-      overflow: auto;
+      overflow: hidden;
       .detail-content{
         background: #fff;
         padding: 15px;
@@ -236,10 +238,14 @@
         .comment-title{
           height: 35px;
           line-height: 35px;
-          font-size: 15px;
+          font-size: 13px;
           text-align: left;
+          border-bottom: 1px solid #eee;
           span.praise-rate{
             color: red;
+          }
+          .more-rating{
+            text-align: right;
           }
         }
       }

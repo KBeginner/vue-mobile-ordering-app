@@ -180,7 +180,7 @@
       right: 0;
       top:200px;
       bottom: 50px;
-      overflow: auto;
+      overflow: hidden;
       .goods-menu{
         flex: 0 0 85px;
         margin-bottom: 20px;
