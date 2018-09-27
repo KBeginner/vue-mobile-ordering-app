@@ -1,40 +1,39 @@
 <template>
   <div class="foodDetail">
     <div class="foodDetail-main" ref="foodDetail">
-      <div>
-        <div class="detail-content">
-          <div class="top">
-            <el-row class="operator-btn">
-              <el-col :span="18" class="close">
-                <a class="btn" @click="closeDetail"><span class="el-icon-close"></span></a>
-              </el-col>
-              <el-col :span="3">
-                <a class="btn"><span class="el-icon-share"></span></a>
-              </el-col>
-              <el-col :span="3">
-                <a class="btn"><span class="el-icon-more"></span></a>
-              </el-col>
-            </el-row>
-            <div class="food-pic">
-              <img :src="foodDetail.picture"/>
-            </div>
+      <div class="detail-content">
+        <div class="top">
+          <el-row class="operator-btn">
+            <el-col :span="18" class="close">
+              <a class="btn" @click="closeDetail"><span class="el-icon-close"></span></a>
+            </el-col>
+            <el-col :span="3">
+              <a class="btn"><span class="el-icon-share"></span></a>
+            </el-col>
+            <el-col :span="3">
+              <a class="btn"><span class="el-icon-more"></span></a>
+            </el-col>
+          </el-row>
+          <div class="food-pic">
+            <img :src="foodDetail.picture"/>
           </div>
-          <div class="goods-info">
-            <h1>{{foodDetail.name}}</h1>
-            <div class="goods-sale-record">
-              <span>月销量 {{foodDetail.month_saled}}</span>
-            </div>
-            <div class="goods-order">
-              <span class="food-price"><i>{{'￥'+foodDetail.min_price}}</i>{{' / '+foodDetail.unit}}</span>
-              <div class="add-shopping-cart">
-                <CartControl v-if="foodDetail.count>0" :food="foodDetail"></CartControl>
-                <div v-else class="select-property">
-                  <span class="select-btn" @click="selectProperty(foodDetail)">选规格</span>
-                </div>
+        </div>
+        <div class="goods-info">
+          <h1>{{foodDetail.name}}</h1>
+          <div class="goods-sale-record">
+            <span>月销量 {{foodDetail.month_saled}}</span>
+          </div>
+          <div class="goods-order">
+            <span class="food-price"><i>{{'￥'+foodDetail.min_price}}</i>{{' / '+foodDetail.unit}}</span>
+            <div class="add-shopping-cart">
+              <CartControl v-if="foodDetail.count>0" :food="foodDetail"></CartControl>
+              <div v-else class="select-property">
+                <span class="select-btn" @click="selectProperty(foodDetail)">选规格</span>
               </div>
             </div>
           </div>
         </div>
+        <div class="blank_"></div>
         <div class="food-rating">
           <el-row v-if="foodDetail.rating" class="comment-title">
             <el-col :span="18">
@@ -133,7 +132,7 @@
     -o-transform: translateY();
     transform: translateY();
     .foodDetail-main{
-      background: #eee;
+      background: #fff;
       margin: 8% auto;
       width: 80vw;
       height: 78vh;
@@ -143,16 +142,16 @@
       z-index: 4;
       overflow: hidden;
       .detail-content{
-        background: #fff;
-        padding: 15px;
+        padding: 15px 0;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
+        .top, .goods-info, .food-rating{
+          padding: 0 15px;
+        }
         .top{
           position: relative;
           .operator-btn{
             width: 100%;
-            position: absolute;
-            top: 0;
             text-align: right;
             .btn{
               width: 30px;
@@ -175,6 +174,7 @@
             }
           }
           .food-pic{
+            margin-top: -30px;
             img{
               width: 100%;
               height: auto;
@@ -184,6 +184,7 @@
         .goods-info{
           flex: 1;
           text-align: left;
+          margin: 10px 0;
           .goods-sale-record{
             color: #C0C4CC;
             margin: 5px 0;
@@ -220,7 +221,7 @@
                   height: 30px;
                   line-height: 30px;
                   text-align: center;
-                  background: #DCC64D ;
+                  background: #F2D323 ;
                   border-radius: 8px;
                   font-size: 14px;
                   font-weight: bold;
@@ -229,25 +230,30 @@
             }
           }
         }
-      }
-      .food-rating{
-        margin-top:10px ;
-        background: #fff;
-        height: auto;
-        padding: 0 15px;
-        .comment-title{
-          height: 35px;
-          line-height: 35px;
-          font-size: 13px;
-          text-align: left;
-          border-bottom: 1px solid #eee;
-          span.praise-rate{
-            color: red;
-          }
-          .more-rating{
-            text-align: right;
+        .food-rating{
+          margin-top:10px ;
+          background: #fff;
+          height: auto;
+          padding: 0 15px;
+          .comment-title{
+            height: 35px;
+            line-height: 35px;
+            font-size: 13px;
+            text-align: left;
+            span.praise-rate{
+              color: red;
+            }
+            .more-rating{
+              text-align: right;
+            }
           }
         }
+        .blank_{
+          height: 10px;
+          width: 100%;
+          background: #eee;
+        }
+
       }
     }
     .bg-fade{

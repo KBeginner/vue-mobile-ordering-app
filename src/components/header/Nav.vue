@@ -1,5 +1,5 @@
 <template>
-  <el-container direction="vertical" >
+  <el-container direction="vertical" class="nav-container">
     <el-menu class="app-nav" :default-active="activeIndex" mode="horizontal" @select="handleSelect">
       <el-menu-item index="goods">
         <router-link to="/goods">点餐</router-link>
@@ -41,12 +41,19 @@
 </script>
 
 <style scoped lang="less">
-  .app-nav{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    .el-menu-item{
-      margin: 0 7vw;
+  .nav-container{
+    .app-nav{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .el-menu-item{
+        margin: 0 7vw;
+      }
+    }
+    ul.el-menu--horizontal>li.el-menu-item.is-active{
+      border-bottom: 2px solid #F2D323;
+      color: #DABA05;
     }
   }
+
 </style>

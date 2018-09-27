@@ -1,19 +1,22 @@
 <template>
-  <ul v-if="data.rating" class="comment">
-    <li class="comment-list" v-for="(item,index) in data.rating.comment_list">
-      <div class="user-icon">
-        <span v-if="item.user_icon"><img :src="item.user_icon"/></span>
-        <span v-else><img src="../../../assets/panda.png"/></span>
-      </div>
-      <div class="user-comment">
-        <el-row class="user-info">
-          <el-col class="user-name" :span="16">{{item.user_name}}</el-col>
-          <el-col class="comment-time" :span="8">{{item.comment_time}}</el-col>
-        </el-row>
-        <p>{{item.comment_content}}</p>
-      </div>
-    </li>
-  </ul>
+  <div>
+    <ul v-if="data.rating.length>0" class="comment">
+      <li class="comment-list" v-for="(item,index) in data.rating.comment_list">
+        <div class="user-icon">
+          <span v-if="item.user_icon"><img :src="item.user_icon"/></span>
+          <span v-else><img src="../../../assets/panda.png"/></span>
+        </div>
+        <div class="user-comment">
+          <el-row class="user-info">
+            <el-col class="user-name" :span="16">{{item.user_name}}</el-col>
+            <el-col class="comment-time" :span="8">{{item.comment_time}}</el-col>
+          </el-row>
+          <p>{{item.comment_content}}</p>
+        </div>
+      </li>
+    </ul>
+    <div v-else class="nothing">暂无评论</div>
+  </div>
 </template>
 
 <script>
@@ -34,6 +37,7 @@
 <style scoped lang="less">
   .comment{
     margin-top: 10px;
+    border-top: 1px solid #eee;
     .comment-list{
       padding: 10px 0;
       text-align: left;
@@ -82,5 +86,11 @@
         }
       }
     }
+  }
+  .nothing{
+    text-align: center;
+    font-size: 15px;
+    color: #ccc;
+    margin: 20px auto;
   }
 </style>
