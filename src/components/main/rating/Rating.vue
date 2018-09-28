@@ -19,7 +19,15 @@
 
 <script>
     export default {
-        name: "Rating"
+        name: "Rating",
+      data(){
+
+      },
+      computed:{
+        ratingsData(){
+          return this.$store.getters.getRating
+        }
+      }
     }
 </script>
 
