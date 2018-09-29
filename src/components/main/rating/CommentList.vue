@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul v-if="data.rating.length>0" class="comment">
+    <ul v-if="data.rating && data.rating.comment_list.length>0" class="comment">
       <li class="comment-list" v-for="(item,index) in data.rating.comment_list">
         <div class="user-icon">
           <span v-if="item.user_icon"><img :src="item.user_icon"/></span>
@@ -30,13 +30,18 @@
       },
       mounted(){
         // console.log(this.data)
+      },
+      watch:{
+        data: function () {
+          console.log(this.data)
+        }
       }
     }
 </script>
 
 <style scoped lang="less">
   .comment{
-    margin-top: 10px;
+    padding-top: 10px;
     border-top: 1px solid #eee;
     .comment-list{
       padding: 10px 0;

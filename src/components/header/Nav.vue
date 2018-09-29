@@ -1,6 +1,9 @@
 <template>
   <el-container direction="vertical" class="nav-container">
-    <el-menu class="app-nav" :default-active="activeIndex" mode="horizontal" @select="handleSelect">
+    <el-menu class="app-nav"
+             mode="horizontal"
+             :default-active="activeIndex"
+             @select="handleSelect">
       <el-menu-item index="goods">
         <router-link to="/goods">点餐</router-link>
       </el-menu-item>
@@ -34,7 +37,7 @@
       },
       watch:{
         getRating:function () {
-          console.log(this.getRating)
+          // console.log(this.getRating)
         }
       }
     }
@@ -51,8 +54,8 @@
       }
     }
     ul.el-menu--horizontal>li.el-menu-item.is-active{
-      border-bottom: 2px solid #F2D323;
-      color: #DABA05;
+      border-bottom: 2px solid #F8C304;
+      color: #F8C304;
     }
   }
 

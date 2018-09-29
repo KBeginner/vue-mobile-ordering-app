@@ -179,7 +179,7 @@
     }
   }
   .highlight{
-    background: #F2D323 !important;
+    background: #F8C304 !important;
     color: #303133 !important;
     font-weight: bold;
   }

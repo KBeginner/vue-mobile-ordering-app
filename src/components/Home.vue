@@ -46,7 +46,6 @@
             })
             .then(res=>{
               if(res.code==0){
-                console.log(res)
                 this.$store.commit('setRating',res.data)
               }
             })

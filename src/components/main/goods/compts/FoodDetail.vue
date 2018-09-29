@@ -221,17 +221,18 @@
                   height: 30px;
                   line-height: 30px;
                   text-align: center;
-                  background: #F2D323 ;
+                  background: #F8C304 ;
                   border-radius: 8px;
                   font-size: 14px;
                   font-weight: bold;
+                  color: #333;
                 }
               }
             }
           }
         }
         .food-rating{
-          margin-top:10px ;
+          /*margin-top:10px ;*/
           background: #fff;
           height: auto;
           padding: 0 15px;

@@ -51,7 +51,9 @@
         newsPic(){
           return this.aboutData.discounts2[0].icon_url
         },
-
+      },
+      mounted(){
+        // console.log(this.aboutData)
       }
     }
 </script>

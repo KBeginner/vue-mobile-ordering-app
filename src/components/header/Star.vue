@@ -12,7 +12,7 @@
       props:['getScore'],
       data(){
         return {
-          temp:4.7
+          temp:0
         }
       },
       computed:{
@@ -32,7 +32,10 @@
           }
           return stars
         }
-      }
+      },
+      mounted(){
+        this.temp = this.getScore;
+      },
     }
 </script>
 
@@ -60,8 +63,8 @@
       background: url("../../assets/star/star24_off@2x.png");   //空星星
     }
     .grade{
-      height: 40px;
-      line-height: 45px;
+      height: 30px;
+      line-height: 35px;
       font-size: 14px;
       margin:0 5px;
     }
