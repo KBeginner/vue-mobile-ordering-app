@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import Score from './Star'
+  import Score from '../common/Star'
     export default {
         name: "About",
       props:['aboutData'],

@@ -58,7 +58,7 @@
   import Vue from 'vue'
   import CartControl from './CartControl'
   import BScroll from 'better-scroll'
-  import CommentList from '../../rating/CommentList'
+  import CommentList from './CommentList'
     export default {
         name: "FoodDetail",
       props:['checkOut'],
@@ -99,6 +99,7 @@
             }else{
               this.detailScroll.refresh()
             }
+            console.log(this.detailScroll)
           });
         }
       },

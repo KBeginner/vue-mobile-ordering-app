@@ -48,7 +48,7 @@
       width: 15px;
       height: 15px;
       display: inline-block;
-      margin: 0 5px;
+      margin: 0 2px;
       background: no-repeat;
       -webkit-background-size: 100% 100%;
       background-size: 100% 100% !important;
