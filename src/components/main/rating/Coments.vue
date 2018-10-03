@@ -18,7 +18,7 @@
           <p>{{item.comment}}</p>
           <div v-show="item.comment_pics && item.comment_pics.length>0" class="comment-pic">
             <span v-for="pic in item.comment_pics" :key="pic.url">
-              <img :src="pic.url"/>
+              <img @click="showBigImg(pic.url)" :src="pic.url"/>
             </span>
           </div>
         </div>
@@ -28,22 +28,35 @@
       <li v-for="item in data.comments"></li>
     </ul>
     <div v-else class="nothing">暂无评论</div>
+    <BigImg v-show="bigImg" :imgSrc="imgSrc" @clickit="closeBigImg"></BigImg>
   </div>
 </template>
 
 <script>
   import Star from '../../common/Star'
+  import BigImg from './BigImg'
   export default {
     name: "Comments",
     components:{
-      Star
+      Star,
+      BigImg
     },
     props:['data'],
     data(){
       return {
-
+        bigImg:false,
+        imgSrc:null
       }
     },
+    methods:{
+      showBigImg(url){
+        this.imgSrc = url;
+        this.bigImg = !this.bigImg;
+      },
+      closeBigImg(){
+        this.bigImg = !this.bigImg;
+      }
+    }
   }
 </script>
 
