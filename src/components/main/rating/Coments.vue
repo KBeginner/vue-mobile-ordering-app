@@ -28,13 +28,13 @@
       <li v-for="item in data.comments"></li>
     </ul>
     <div v-else class="nothing">暂无评论</div>
-    <BigImg v-show="bigImg" :imgSrc="imgSrc" @clickit="closeBigImg"></BigImg>
+    <!--<BigImg v-show="bigImg" :imgSrc="imgSrc" @closed="closeBigImg"></BigImg>-->
   </div>
 </template>
 
 <script>
   import Star from '../../common/Star'
-  import BigImg from './BigImg'
+  import BigImg from './BigImage'
   export default {
     name: "Comments",
     components:{
@@ -109,6 +109,7 @@
           margin: 10px 0;
           .pinFen{
             margin-right: 5px;
+            font-size: 12px;
           }
         }
         p{
@@ -124,6 +125,9 @@
             img{
               width: 85px;
               height: 85px;
+              -webkit-border-radius: 4px;
+              -moz-border-radius: 4px;
+              border-radius: 4px;
             }
           }
         }
