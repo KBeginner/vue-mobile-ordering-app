@@ -109,7 +109,7 @@
 <style scoped lang="less">
   .rating{
     width: 100vw;
-    height: 500px;
+    height: 1000px;
     padding:10px 0;
     font-size: 13px;
     color: #606266;
