@@ -184,10 +184,12 @@
       .illustrate{
         padding-left: 10px;
         font-size: 14px;
-        overflow: hidden;
-        -webkit-line-clamp:1;
-        display: -webkit-box;
-        -webkit-box-orient:vertical;
+        overflow: hidden;       //隐藏溢出的内容
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        -webkit-line-clamp:1;   //设置行数
+        display: -webkit-box;   //盒子模型
+        -webkit-box-orient:vertical;    //元素的垂直居中排列
       }
     }
     .activity-item{
