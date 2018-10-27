@@ -99,7 +99,6 @@
             }else{
               this.detailScroll.refresh()
             }
-            console.log(this.detailScroll)
           });
         }
       },

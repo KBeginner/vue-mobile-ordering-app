@@ -5,8 +5,6 @@ import Goods from '../components/main/goods/Goods'
 import Rating from '../components/main/rating/Rating'
 import Seller from '../components/main/seller/Seller'
 
-import Test from '../components/test/Test'
-
 Vue.use(Router);
 
 export default new Router({
@@ -35,11 +33,6 @@ export default new Router({
           component:Seller
         },
       ]
-    },
-    {
-      path:'/Test',
-      name:'testLink',
-      component:Test
     }
   ],
   mode:'history'

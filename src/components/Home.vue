@@ -49,12 +49,27 @@
                 this.$store.commit('setRating',res.data)
               }
             })
-        }
-
+        },
+        /*获取商家信息*/
+        getSeller(){
+          fetch('/api/seller')
+            .then(res=>{
+              return res.json()
+            })
+            .then(res=>{
+              if(res.code == 0){
+                this.$store.state.sellerInfo = res.data     //拿到商家的基本信息
+              }
+            })
+            .catch(error=>{
+              this.$message.error('发生异常，请稍后再试')
+            })
+        },
       },
       created(){
         this.getGoods();
         this.getRating();
+        this.getSeller()
       },
     }
 </script>

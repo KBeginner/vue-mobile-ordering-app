@@ -150,7 +150,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          margin: 5px 0;
+          margin: 10px 0;
           .foods-name-col,.foods-price,.cart-control{
             display: inline-block;
           }

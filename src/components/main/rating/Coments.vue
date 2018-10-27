@@ -8,8 +8,8 @@
         </div>
         <div class="user-comment">
           <el-row class="user-info">
-            <el-col class="user-name" :span="16">{{item.user_name}}</el-col>
-            <el-col class="comment-time" :span="8">{{item.comment_time}}</el-col>
+            <el-col class="user-name" :span="12">{{item.user_name}}</el-col>
+            <el-col class="comment-time" :span="12">{{formatDate(item.comment_time)}}</el-col>
           </el-row>
           <el-row class="user-score">
             <span class="pinFen">评分</span>
@@ -49,6 +49,17 @@
       }
     },
     methods:{
+      /*将时间戳转成时间 YYYY-MM-DD hh:mm:ss*/
+      formatDate(timeStamp){
+        let date = new Date(timeStamp*1000);
+        let Y = date.getFullYear()+'-';
+        let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1)+'-';
+        let D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate())+' ';
+        let h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours())+':';
+        let m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes())+':';
+        let s = (date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds());
+        return Y+M+D+h+m+s
+      },
       showBigImg(url){
         this.imgSrc = url;
         this.bigImg = !this.bigImg;

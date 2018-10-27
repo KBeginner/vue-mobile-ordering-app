@@ -131,9 +131,11 @@
 
         /*点击菜单栏，跳转对应的品类*/
         selectMenu(index) {
-          let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
-          let element = foodList[index];
-          this.foodScroll.scrollToElement(element, 250);   //scrollToElement是better-scroll滚动到目标元素的事件
+          this.$nextTick(()=>{
+            let foodList = this.$refs.foodScroll.getElementsByClassName('foods-list');
+            let element = foodList[index];
+            this.foodScroll.scrollToElement(element, 250);   //scrollToElement是better-scroll滚动到目标元素的事件
+          });
         },
 
         /*计算商品列表里加入购物车的商品数量*/

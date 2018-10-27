@@ -70,30 +70,33 @@
         ratingsData(){
           return this.$store.getters.getRating
         },
+        /*获取评论*/
         setComments(){
-          if (this.selectType==ALL){
+          if (this.selectType==ALL){    //所有评论
             return this.ratingsData.comments;
           }
-          else if(this.selectType==PICTURE){
+          else if(this.selectType==PICTURE){    //带图片的评论
             return this.ratingsData.comments.filter((comment)=>{
               return comment.comment_pics.length>0
             })
           }
           else{
-            return this.ratingsData.comments_dp
+            return this.ratingsData.comments_dp     //点评评论
           }
         }
       },
       methods:{
         initScroll(){
           this.$nextTick( ()=>{
-            if(!this.BScroll){
-              this.BScroll = new BS(this.$refs.rating,{
-                click:true,
-              });
-            }else{
-              this.BScroll.refresh();
-            }
+            setTimeout(()=>{
+              if(!this.BScroll){
+                this.BScroll = new BS(this.$refs.rating,{
+                  click:true,
+                });
+              }else{
+                this.BScroll.refresh();
+              }
+            },0);
           });
         },
         handleClick(tab){
