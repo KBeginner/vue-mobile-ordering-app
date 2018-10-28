@@ -1,7 +1,9 @@
 <template>
   <el-container class="app-container" direction="vertical">
     <Header></Header>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </el-container>
 </template>
 
